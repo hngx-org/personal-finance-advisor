@@ -12,50 +12,55 @@ class PaymentPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Container(
+          decoration: BoxDecoration(
+            color: Colors.white24,
+          ),
           child: Padding(
-            padding: const EdgeInsets.all(Dimensions.small),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(
-                  child: Text("Complete Your Payment for Premium Content"),
-                ),
-                Spacing.mediumHeight(),
-                Text("Email"),
-                Spacing.smallHeight(),
-                CustomContainerTextField(
-                  boxheight: Dimensions.large,
-                ),
-                Spacing.mediumHeight(),
-                Text("First Name"),
-                Spacing.smallHeight(),
-                CustomContainerTextField(
-                  boxheight: Dimensions.large,
-                ),
-                Spacing.mediumHeight(),
-                Text("Last Name"),
-                Spacing.smallHeight(),
-                CustomContainerTextField(
-                  boxheight: Dimensions.large,
-                ),
-                Spacing.mediumHeight(),
-                Text("Card Number"),
-                Spacing.smallHeight(),
-                CustomContainerTextField(
-                  boxheight: Dimensions.large,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Center(
+                      child: Text("Complete Your Payment for Premium Content"),
+                    ),
+                    Spacing.mediumHeight(),
+                    Text("Email"),
+                    Spacing.smallHeight(),
                     CustomContainerTextField(
-                      boxheight: Dimensions.medium,
+                      boxheight: Dimensions.large,
                       boxwidth: Dimensions.medium,
                     ),
-                     CustomContainerTextField(
-                      boxheight: Dimensions.medium,
+                    Spacing.mediumHeight(),
+                    Text("First Name"),
+                    Spacing.smallHeight(),
+                    CustomContainerTextField(
+                      boxheight: Dimensions.large,
+                      boxwidth: Dimensions.medium,
+                    ),
+                    Spacing.mediumHeight(),
+                    Text("Last Name"),
+                    Spacing.smallHeight(),
+                    CustomContainerTextField(
+                      boxheight: Dimensions.large,
+                      boxwidth: Dimensions.medium,
+                    ),
+                    Spacing.mediumHeight(),
+                    Text("Card Number"),
+                    Spacing.smallHeight(),
+                    CustomContainerTextField(
+                      boxheight: Dimensions.large,
                       boxwidth: Dimensions.medium,
                     ),
                   ],
+                ),
+                Spacing.smallHeight(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text("Hi"),
+                   Text("Hey")],
                 ),
               ],
             ),
