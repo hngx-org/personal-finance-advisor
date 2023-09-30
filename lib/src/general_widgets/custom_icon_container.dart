@@ -79,6 +79,7 @@ class CustomIconContainer extends StatelessWidget {
             width: iconWidth,
           ),
           SizedBox(width: spacingWidth),
+          TextFormField(),
           Text(
             containerText,
             style: containerTextStyle,
