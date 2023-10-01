@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
 import 'package:personal_finance_advisor/src/features/chat/page/chat_screens.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_elevated_button.dart';
-import 'package:personal_finance_advisor/src/general_widgets/custom_icon_button.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_image_view.dart';
 import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
