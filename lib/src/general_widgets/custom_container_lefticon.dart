@@ -1,8 +1,4 @@
-import 'package:event_app/src/core/constants/dimensions.dart';
-import 'package:event_app/src/core/utils/theme/colors.dart';
-import 'package:event_app/src/core/utils/theme/text_styles.dart';
-import 'package:event_app/src/general_widgets/custom_image_view.dart';
-import 'package:event_app/src/general_widgets/spacing.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
