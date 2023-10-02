@@ -102,6 +102,7 @@ class ChatScreen extends StatelessWidget {
         color: const Color(0XFF3F3F3F).withOpacity(0.3),
         alignment: Alignment.center,
         padding: const EdgeInsets.all(Dimensions.medium),
+        margin: MediaQuery.of(context).viewInsets,
         child: AppTextField(
           hintText: 'Let me give you financial advice',
           borderRadius: 30,
