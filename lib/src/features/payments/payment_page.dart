@@ -15,12 +15,10 @@ class PaymentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            color: const Color(0xFF3369FF).withOpacity(0.1),
-          ),
+    return Scaffold(
+      backgroundColor: Colors.lightBlue.shade50,
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(Dimensions.medium),
             child: Column(
@@ -93,6 +91,7 @@ class PaymentPage extends StatelessWidget {
                 ),
                 const Spacing.smallHeight(),
                 const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       children: [
@@ -107,27 +106,31 @@ class PaymentPage extends StatelessWidget {
                       ],
                     ),
                     Spacing.largeWidth(),
-                    Column(children: [
-                      Row(children: [
-                        Image(
-                          image: AssetImage("images/mastercard.png"),
-                          height: Dimensions.large,
-                          width: Dimensions.large,
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Image(
+                              image: AssetImage("images/mastercard.png"),
+                              height: Dimensions.large,
+                              width: Dimensions.large,
+                            ),
+                            Spacing.mediumWidth(),
+                            Image(
+                              image: AssetImage("images/visa.png"),
+                              height: Dimensions.large,
+                              width: Dimensions.large,
+                            ),
+                            //   Image(
+                            //   image: AssetImage("images/americanexpress.png"),
+                            //   height: Dimensions.small,
+                            //   width: Dimensions.small,
+                            // ),
+                          ],
                         ),
-                        Spacing.mediumWidth(),
-                        Image(
-                          image: AssetImage("images/visa.png"),
-                          height: Dimensions.large,
-                          width: Dimensions.large,
-                        ),
-                        //   Image(
-                        //   image: AssetImage("images/americanexpress.png"),
-                        //   height: Dimensions.small,
-                        //   width: Dimensions.small,
-                        // ),
-                      ]),
-                      //
-                    ]),
+                        //
+                      ],
+                    ),
                   ],
                 ),
                 Align(
