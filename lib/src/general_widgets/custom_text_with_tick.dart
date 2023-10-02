@@ -10,7 +10,8 @@ class CustomTickText extends StatelessWidget {
     super.key,
     this.content,
     this.iconkbgcolor,
-    this.iconkcolor,});
+    this.iconkcolor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +30,16 @@ class CustomTickText extends StatelessWidget {
           ),
         ),
         Spacing.tinyWidth(),
-        RichText(
-          text: TextSpan(
-            text: content,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: Dimensions.medium,
+        SizedBox(
+          width: 130,
+          child: RichText(
+            text: TextSpan(
+              text: content,
+              style: TextStyle(
+                overflow: TextOverflow.ellipsis,
+                color: Colors.black,
+                fontSize: Dimensions.medium,
+              ),
             ),
           ),
         ),

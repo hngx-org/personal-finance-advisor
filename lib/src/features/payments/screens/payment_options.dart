@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/text_styles.dart';
+import 'package:personal_finance_advisor/src/features/chat/page/chat_intro_screen.dart';
+import 'package:personal_finance_advisor/src/features/payments/payment_page.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_elevated_button.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_pricing_container.dart';
 import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
@@ -31,8 +34,8 @@ class PaymentOptions extends StatelessWidget {
                 Spacing.bigHeight(),
                 CustomPricingContainer(
                   plan: "BASIC",
-                 
-                  plantext: """For all individuals who want an experience of Finance Advisor""",
+                  plantext:
+                      """For all individuals who want an experience of Finance Advisor""",
                   kcontent: [
                     "Unlimited prompts",
                   ],
@@ -45,21 +48,38 @@ class PaymentOptions extends StatelessWidget {
                   planprice: r"$40",
                   pricetext: "Per member, per month",
                   buttontext: "Start 14 day free trial",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const ChatIntroScreen(),
+                        ));
+                  },
                 ),
                 CustomPricingContainer(
                   plan: "PREMIUM",
-                  plantext: """For individuals who want full experience of Finance Advisor""",
+                  plantext:
+                      """For individuals who want full experience of Finance Advisor""",
                   planprice: r"$49",
                   pricetext: "Per member, per month",
                   containercolor: Colors.blueAccent,
                   buttonColor: Color(0xFFF9D783),
                   iconkbgcolor: AppColors.baseWhite,
                   iconkcolor: AppColors.baseBlack,
-                  kcontent: ["Unlimited Prompts", "Personalised answers", "Financial Summary"],
+                  kcontent: [
+                    "Unlimited Prompts",
+                    "Personalised answers",
+                    "Financial Summary"
+                  ],
                   buttontext: "Get Premium",
                   buttontextcolor: AppColors.baseBlack,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const PaymentPage(),
+                        ));
+                  },
                 ),
               ],
             ),
@@ -76,7 +96,13 @@ class PaymentOptions extends StatelessWidget {
                   Color(0xFFF9D783),
                 ),
               ),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => const PaymentPage(),
+                    ));
+              },
             ),
           ],
         ),

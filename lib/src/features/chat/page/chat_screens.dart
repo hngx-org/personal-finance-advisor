@@ -12,7 +12,7 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: Dimensions.small,
+        elevation: Dimensions.tiny,
         title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
+import 'package:personal_finance_advisor/src/features/chat/page/chat_intro_screen.dart';
 import 'package:personal_finance_advisor/src/general_widgets/Custom_Small_Text_Form.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_container_lefticon.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_container_text_field.dart';
@@ -17,13 +19,13 @@ class PaymentPage extends StatelessWidget {
       child: Scaffold(
         body: Container(
           decoration: BoxDecoration(
-            color: Color(0xFF3369FF).withOpacity(0.1),
+            color: const Color(0xFF3369FF).withOpacity(0.1),
           ),
           child: Padding(
             padding: const EdgeInsets.all(Dimensions.medium),
             child: Column(
               children: [
-                Column(
+                const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
@@ -59,8 +61,8 @@ class PaymentPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                Spacing.smallHeight(),
-                Row(
+                const Spacing.smallHeight(),
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
@@ -89,8 +91,8 @@ class PaymentPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                Spacing.smallHeight(),
-                Row(
+                const Spacing.smallHeight(),
+                const Row(
                   children: [
                     Column(
                       children: [
@@ -132,13 +134,20 @@ class PaymentPage extends StatelessWidget {
                   alignment: Alignment.bottomRight,
                   child: CustomElevatedButton(
                     text: " Pay",
-                    buttonTextStyle: TextStyle(color: AppColors.baseWhite),
+                    buttonTextStyle:
+                        const TextStyle(color: AppColors.baseWhite),
                     width: MediaQuery.sizeOf(context).width * 0.4,
                     height: MediaQuery.sizeOf(context).height * 0.05,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => const ChatIntroScreen(),
+                          ));
+                    },
                     buttonStyle: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
-                        Color(0xFF3369FF),
+                        const Color(0xFF3369FF),
                       ),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(

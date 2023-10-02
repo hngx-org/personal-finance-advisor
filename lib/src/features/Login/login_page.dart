@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:personal_finance_advisor/src/features/payments/payment_page.dart';
+import 'package:personal_finance_advisor/src/features/payments/screens/payment_options.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_elevated_button.dart';
 
 class LoginPage extends StatelessWidget {
@@ -33,7 +36,6 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
 
-
               //Name
               Text(
                 'Enter your name',
@@ -65,14 +67,22 @@ class LoginPage extends StatelessWidget {
               TextField(
                 controller: _controller,
               ),
-              
+
               const SizedBox(
                 height: 35,
               ),
 
-              CustomElevatedButton(text: 'Login', onTap:() {
-                //Navigator.push();
-              },)
+              CustomElevatedButton(
+                height: 52,
+                text: 'Login',
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => const PaymentOptions(),
+                      ));
+                },
+              )
             ],
           ),
         ),
