@@ -1,27 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
+import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
 class CustomTickText extends StatelessWidget {
   final String? content;
-  const CustomTickText({super.key, this.content});
+  final Color? iconkcolor;
+  final Color? iconkbgcolor;
+  const CustomTickText({
+    super.key,
+    this.content,
+    this.iconkbgcolor,
+    this.iconkcolor,});
 
   @override
   Widget build(BuildContext context) {
-    return Text.rich(
-      TextSpan(
-        children: [
-          WidgetSpan(
-            child: Icon(Icons.check, color: Colors.black // green tick icon
-                ),
+    return Row(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(
+              Dimensions.medium), // change this to your desired border radius
+          child: Container(
+            color: iconkbgcolor, // change this to your desired background color
+            child: Icon(
+              Icons.check,
+              color: iconkcolor,
+              size: Dimensions.medium,
+            ), // change this to your desired icon and color
           ),
-          TextSpan(
+        ),
+        Spacing.tinyWidth(),
+        RichText(
+          text: TextSpan(
             text: content,
             style: TextStyle(
               color: Colors.black,
-              fontSize: 10,
+              fontSize: Dimensions.medium,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

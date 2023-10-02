@@ -1,27 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
+import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
 class CustomCloseText extends StatelessWidget {
   final String? contentx;
-  const CustomCloseText({super.key, this.contentx});
+  final Color? iconxcolor;
+  final Color? iconxbgcolor;
+  
+  const CustomCloseText({super.key, this.contentx, this.iconxcolor,  this.iconxbgcolor});
 
   @override
   Widget build(BuildContext context) {
-    return Text.rich(
-  TextSpan(
-    children: [
-      WidgetSpan(
-        child: Icon(Icons.close, color: Colors.black), // red x icon
-      ),
-      TextSpan(
-        text: contentx,
-        style: TextStyle(
-          fontSize: 8,
-          color: Colors.black,
+    return Row(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(
+              Dimensions.medium), // change this to your desired border radius
+          child: Container(
+            color: iconxbgcolor, // change this to your desired background color
+            child: Icon(
+              Icons.close,
+              color: iconxcolor,
+              size: Dimensions.medium,
+            ), // change this to your desired icon and color
+          ),
         ),
-      ),
-    ],
-  ),
-)
-;
+        Spacing.tinyWidth(),
+        RichText(
+          text: TextSpan(
+            text: contentx,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: Dimensions.medium,
+            ),
+          ),
+        ),
+      ],
+    );
+  
   }
 }
