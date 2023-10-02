@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:personal_finance_advisor/src/features/chat/page/chat_screens.dart';
+import 'package:personal_finance_advisor/src/features/payments/payment_page.dart';
+import 'package:personal_finance_advisor/src/features/payments/screens/payment_options.dart';
 
 import 'src/features/chat/page/chat_intro_screen.dart';
 
@@ -19,6 +21,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const ChatIntroScreen(),
+//       home: const PaymentOptions(),
+
     );
   }
 }
