@@ -6,8 +6,9 @@ class CustomCloseText extends StatelessWidget {
   final String? contentx;
   final Color? iconxcolor;
   final Color? iconxbgcolor;
-  
-  const CustomCloseText({super.key, this.contentx, this.iconxcolor,  this.iconxbgcolor});
+
+  const CustomCloseText(
+      {super.key, this.contentx, this.iconxcolor, this.iconxbgcolor});
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +27,20 @@ class CustomCloseText extends StatelessWidget {
           ),
         ),
         Spacing.tinyWidth(),
-        RichText(
-          text: TextSpan(
-            text: contentx,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: Dimensions.medium,
+        SizedBox(
+          width: 130,
+          child: RichText(
+            text: TextSpan(
+              text: contentx,
+              style: TextStyle(
+                overflow: TextOverflow.ellipsis,
+                color: Colors.black,
+                fontSize: Dimensions.medium,
+              ),
             ),
           ),
         ),
       ],
     );
-  
   }
 }
