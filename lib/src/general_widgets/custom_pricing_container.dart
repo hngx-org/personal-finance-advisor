@@ -53,17 +53,14 @@ class CustomPricingContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment
-            .center, // center the custom text widgets vertically
-        crossAxisAlignment: CrossAxisAlignment
-            .start, // align the custom text widgets to the start horizontally
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             child: Column(
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * 0.18,
-                  alignment: Alignment.topLeft,
                   padding: EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
                     color: Color(0xFFF1F1F1),
@@ -77,6 +74,7 @@ class CustomPricingContainer extends StatelessWidget {
                     ),
                   ),
                 ),
+                Spacing.mediumHeight(),
                 Padding(
                   padding: const EdgeInsets.all(Dimensions.small),
                   child: Text(plantext ?? " Nothing",
@@ -86,6 +84,7 @@ class CustomPricingContainer extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       )),
                 ),
+                Spacing.mediumHeight(),
                 Divider(
                   color: Color(0xFF001C80),
                   thickness: 2.0,
@@ -100,12 +99,14 @@ class CustomPricingContainer extends StatelessWidget {
                         style: TextStyle(
                           color: AppColors.baseBlack,
                           fontSize: Dimensions.large,
-                          fontWeight: FontWeight.bold,),
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       TextSpan(
                         text: '\n$pricetext',
                         style: TextStyle(
-                            color: AppColors.baseBlack, fontSize: Dimensions.smedium),
+                            color: AppColors.baseBlack,
+                            fontSize: Dimensions.smedium),
                       ),
                     ],
                   ),
@@ -119,26 +120,33 @@ class CustomPricingContainer extends StatelessWidget {
               ],
             ),
           ),
-          ListView.builder(
+          ListView.separated(
             shrinkWrap: true,
-            itemCount: kcontent!.length,
+            itemCount: kcontent!.length +
+                (xcontent?.length ?? 0), // the total number of items
             itemBuilder: (context, index) {
-              return CustomTickText(
-                iconkbgcolor: iconkbgcolor ?? AppColors.baseBlack,
-                iconkcolor: iconkcolor ?? AppColors.baseWhite,
-                content: kcontent![index],
-              );
+              if (index < kcontent!.length) {
+                // if the index is within the range of kcontent
+                return CustomTickText(
+                  // return the custom tick text widget
+                  iconkbgcolor: iconkbgcolor ?? AppColors.baseBlack,
+                  iconkcolor: iconkcolor ?? AppColors.baseWhite,
+                  content: kcontent![index],
+                );
+              } else {
+                // otherwise, the index is within the range of xcontent
+                return CustomCloseText(
+                  // return the custom close text widget
+                  iconxbgcolor: iconxbgcolor ?? AppColors.baseBlack,
+                  iconxcolor: iconxcolor ?? AppColors.baseWhite,
+                  contentx: xcontent![index -
+                      kcontent!
+                          .length], // adjust the index to match the xcontent list
+                );
+              }
             },
-          ),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: xcontent?.length ?? 0,
-            itemBuilder: (context, index) {
-              return CustomCloseText(
-                iconxbgcolor: iconxbgcolor ?? AppColors.baseBlack,
-                iconxcolor: iconxcolor ?? AppColors.baseWhite,
-                contentx: xcontent![index],
-              );
+            separatorBuilder: (context, index) {
+              return SizedBox(height: 0.0); // zero height separator
             },
           ),
           Spacing.mediumHeight(),
