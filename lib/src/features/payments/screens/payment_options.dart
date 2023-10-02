@@ -11,73 +11,75 @@ class PaymentOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: AppColors.baseWhite,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          // Add the title as the first child of the column
-          Text(
-            "Choose your payment option",
-            style: TextStyle(color: AppColors.baseBlack, fontSize: 24.0),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Spacing.bigHeight(),
-              CustomPricingContainer(
-                plan: "BASIC",
-               
-                plantext: """For all individuals who want an experience of Finance Advisor""",
-                kcontent: [
-                  "Unlimited prompts",
-                ],
-                xcontent: [
-                  "Financial Summary",
-                  "Personalised answers",
-                ],
-                iconxbgcolor: AppColors.baseBlack,
-                iconxcolor: AppColors.baseWhite,
-                planprice: r"$40",
-                pricetext: "Per member, per month",
-                buttontext: "Start 14 day free trial",
-                onTap: () {},
-              ),
-              CustomPricingContainer(
-                plan: "PREMIUM",
-                plantext: """For individuals who want full experience of Finance Advisor""",
-                planprice: r"$49",
-                pricetext: "Per member, per month",
-                containercolor: Colors.blueAccent,
-                buttonColor: Color(0xFFF9D783),
-                iconkbgcolor: AppColors.baseWhite,
-                iconkcolor: AppColors.baseBlack,
-                kcontent: ["Unlimited Prompts", "Personalised  answers", "Financial Summary"],
-                buttontext: "Get Premium",
-                buttontextcolor: AppColors.baseBlack,
-                onTap: () {},
-              ),
-            ],
-          ),
-          // Add some more text as the last child of the column
-          Text(
-            "Try our 100% free plan",
-            style: TextStyle(color: AppColors.baseBlack, fontSize: 16.0),
-          ),
-          CustomElevatedButton(
-            text: "Sign up today",
-            width: MediaQuery.sizeOf(context).width * 0.35,
-            buttonStyle: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(
-                Color(0xFFF9D783),
-              ),
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: AppColors.baseWhite,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // Add the title as the first child of the column
+            Text(
+              "Choose your payment option",
+              style: TextStyle(color: AppColors.baseBlack, fontSize: 24.0),
             ),
-            onTap: () {},
-          ),
-        ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Spacing.bigHeight(),
+                CustomPricingContainer(
+                  plan: "BASIC",
+                 
+                  plantext: """For all individuals who want an experience of Finance Advisor""",
+                  kcontent: [
+                    "Unlimited prompts",
+                  ],
+                  xcontent: [
+                    "Financial Summary",
+                    "Personalised answers",
+                  ],
+                  iconxbgcolor: AppColors.baseBlack,
+                  iconxcolor: AppColors.baseWhite,
+                  planprice: r"$40",
+                  pricetext: "Per member, per month",
+                  buttontext: "Start 14 day free trial",
+                  onTap: () {},
+                ),
+                CustomPricingContainer(
+                  plan: "PREMIUM",
+                  plantext: """For individuals who want full experience of Finance Advisor""",
+                  planprice: r"$49",
+                  pricetext: "Per member, per month",
+                  containercolor: Colors.blueAccent,
+                  buttonColor: Color(0xFFF9D783),
+                  iconkbgcolor: AppColors.baseWhite,
+                  iconkcolor: AppColors.baseBlack,
+                  kcontent: ["Unlimited Prompts", "Personalised answers", "Financial Summary"],
+                  buttontext: "Get Premium",
+                  buttontextcolor: AppColors.baseBlack,
+                  onTap: () {},
+                ),
+              ],
+            ),
+            // Add some more text as the last child of the column
+            Text(
+              "Try our 100% free plan",
+              style: TextStyle(color: AppColors.baseBlack, fontSize: 16.0),
+            ),
+            CustomElevatedButton(
+              text: "Sign up today",
+              width: MediaQuery.sizeOf(context).width * 0.35,
+              buttonStyle: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  Color(0xFFF9D783),
+                ),
+              ),
+              onTap: () {},
+            ),
+          ],
+        ),
       ),
     );
   }

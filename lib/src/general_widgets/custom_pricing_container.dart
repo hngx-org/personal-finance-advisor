@@ -66,11 +66,13 @@ class CustomPricingContainer extends StatelessWidget {
                     color: Color(0xFFF1F1F1),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: Text(
-                    plan!,
-                    style: TextStyle(
-                      color: AppColors.baseBlack,
-                      fontSize: Dimensions.smedium,
+                  child: Center(
+                    child: Text(
+                      plan!,
+                      style: TextStyle(
+                        color: AppColors.baseBlack,
+                        fontSize: Dimensions.smedium,
+                      ),
                     ),
                   ),
                 ),
@@ -120,34 +122,37 @@ class CustomPricingContainer extends StatelessWidget {
               ],
             ),
           ),
-          ListView.separated(
-            shrinkWrap: true,
-            itemCount: kcontent!.length +
-                (xcontent?.length ?? 0), // the total number of items
-            itemBuilder: (context, index) {
-              if (index < kcontent!.length) {
-                // if the index is within the range of kcontent
-                return CustomTickText(
-                  // return the custom tick text widget
-                  iconkbgcolor: iconkbgcolor ?? AppColors.baseBlack,
-                  iconkcolor: iconkcolor ?? AppColors.baseWhite,
-                  content: kcontent![index],
-                );
-              } else {
-                // otherwise, the index is within the range of xcontent
-                return CustomCloseText(
-                  // return the custom close text widget
-                  iconxbgcolor: iconxbgcolor ?? AppColors.baseBlack,
-                  iconxcolor: iconxcolor ?? AppColors.baseWhite,
-                  contentx: xcontent![index -
-                      kcontent!
-                          .length], // adjust the index to match the xcontent list
-                );
-              }
-            },
-            separatorBuilder: (context, index) {
-              return SizedBox(height: 0.0); // zero height separator
-            },
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: ListView.separated(
+              shrinkWrap: true,
+              itemCount: kcontent!.length +
+                  (xcontent?.length ?? 0), // the total number of items
+              itemBuilder: (context, index) {
+                if (index < kcontent!.length) {
+                  // if the index is within the range of kcontent
+                  return CustomTickText(
+                    // return the custom tick text widget
+                    iconkbgcolor: iconkbgcolor ?? AppColors.baseBlack,
+                    iconkcolor: iconkcolor ?? AppColors.baseWhite,
+                    content: kcontent![index],
+                  );
+                } else {
+                  // otherwise, the index is within the range of xcontent
+                  return CustomCloseText(
+                    // return the custom close text widget
+                    iconxbgcolor: iconxbgcolor ?? AppColors.baseBlack,
+                    iconxcolor: iconxcolor ?? AppColors.baseWhite,
+                    contentx: xcontent![index -
+                        kcontent!
+                            .length], // adjust the index to match the xcontent list
+                  );
+                }
+              },
+              separatorBuilder: (context, index) {
+                return SizedBox(height: 0.0); // zero height separator
+              },
+            ),
           ),
           Spacing.mediumHeight(),
           Align(
