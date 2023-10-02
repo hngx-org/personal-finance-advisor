@@ -142,7 +142,8 @@ class _AppTextFieldState extends State<AppTextField> {
               // errorStyle: const TextStyle(
               //   fontSize: 10,
               // ),
-              fillColor: widget.backgroundColor ?? AppColors.gray100,
+              fillColor: widget.backgroundColor ??
+                  AppColors.primaryMainColor.withOpacity(0.1),
               hintText: widget.hintText,
               hintStyle: AppTextStyles.textXsRegular.copyWith(
                   fontWeight: FontWeight.w400,
