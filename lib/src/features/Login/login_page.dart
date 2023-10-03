@@ -15,24 +15,26 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.blue.shade100,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              //illustrator
-              // Container(
-              //   padding: EdgeInsets.all(50),
-              //   child: SvgPicture.asset(
-              //     'lib/src/asset/undraw_login_re_4vu2.svg',
-              //   ),
-              // ),
-
-              //welcome back
-              const Center(
-                child: Text(
-                  'Welcome',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //illustrator
+                // Container(
+                //   padding: EdgeInsets.all(50),
+                //   child: SvgPicture.asset(
+                //     'lib/src/asset/undraw_login_re_4vu2.svg',
+                //   ),
+                // ),
+        
+                //welcome back
+                const Center(
+                  child: Text(
+                    'Welcome',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
 
