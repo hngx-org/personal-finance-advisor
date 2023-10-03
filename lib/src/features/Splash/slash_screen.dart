@@ -3,6 +3,8 @@ import 'package:personal_finance_advisor/src/features/Login/login_page.dart';
 import 'package:personal_finance_advisor/src/features/Splash/screen_ui.dart';
 import 'package:personal_finance_advisor/src/features/chat/page/chat_screens.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:personal_finance_advisor/src/features/onboarding/first_screen.dart';
+import 'package:personal_finance_advisor/src/features/onboarding/onboarding.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -11,7 +13,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       splash: const ScreenUI(),
-      nextScreen: const LoginPage(),
+      nextScreen: const FirstScreen(),
     );
   }
 }
