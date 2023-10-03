@@ -36,6 +36,7 @@ class LoginPage extends StatelessWidget {
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ),
+              ]
               ),
 
               //Name
@@ -86,6 +87,7 @@ class LoginPage extends StatelessWidget {
                 },
               )
             ],
+          )
           ),
         ),
       ),
