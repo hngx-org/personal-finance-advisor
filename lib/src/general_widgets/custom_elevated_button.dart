@@ -1,3 +1,4 @@
+import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/theme_helper.dart';
 import 'package:personal_finance_advisor/src/general_widgets/base_button.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,7 @@ class CustomElevatedButton extends BaseButton {
   }
 
   Widget get buildElevatedButtonWidget => Container(
-        height: this.height ?? 30,
+        height: this.height ?? 60,
         width: this.width ?? double.maxFinite,
         margin: margin,
         decoration: decoration,
@@ -58,10 +59,16 @@ class CustomElevatedButton extends BaseButton {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               leftIcon ?? const SizedBox.shrink(),
+              const Spacer(),
               Text(
                 text,
-                style: buttonTextStyle ?? theme.textTheme.labelLarge,
+                style: buttonTextStyle ??
+                    theme.textTheme.labelLarge!.copyWith(
+                        color:  AppColors.baseWhite,
+                        fontSize: 19,
+                        fontWeight: FontWeight.w700),
               ),
+              const Spacer(),
               rightIcon ?? const SizedBox.shrink(),
             ],
           ),

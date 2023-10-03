@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:personal_finance_advisor/src/features/Login/login_page.dart';
+
+import 'package:personal_finance_advisor/src/features/auth/screens/sign_up_screen.dart';
 import 'package:personal_finance_advisor/src/features/onboarding/forth_screen.dart';
 
 class ThirdScreen extends StatelessWidget {
@@ -49,7 +51,7 @@ class ThirdScreen extends StatelessWidget {
               // const SizedBox(
               //   height: 69,
               // ),
-              Spacer(),
+              const Spacer(),
 
               //navigation in row
               Row(
@@ -57,11 +59,12 @@ class ThirdScreen extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
+                      Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
+                          builder: (context) => const SignUpScreen(),
                         ),
+                        ModalRoute.withName('/'),
                       );
                     },
                     child: const Text(
@@ -76,7 +79,7 @@ class ThirdScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
+                        CupertinoPageRoute(
                           builder: (context) => const ForthScreen(),
                         ),
                       );
@@ -91,7 +94,7 @@ class ThirdScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Spacer()
+              const Spacer()
             ],
           ),
         ),

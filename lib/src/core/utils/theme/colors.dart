@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 /// https://verygood.ventures
 
 abstract class AppColors {
+  static const Color primaryMainColor = Color(0XFF3369FF);
   // primary1000 Color Swatch
   static const Color primary1000 = Color(0xff063b27);
   // primary900 Color Swatch
