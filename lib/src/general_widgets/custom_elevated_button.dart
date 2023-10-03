@@ -47,7 +47,7 @@ class CustomElevatedButton extends BaseButton {
   }
 
   Widget get buildElevatedButtonWidget => Container(
-        height: this.height ?? 30,
+        height: this.height ?? 60,
         width: this.width ?? double.maxFinite,
         margin: margin,
         decoration: decoration,
@@ -64,7 +64,7 @@ class CustomElevatedButton extends BaseButton {
                 text,
                 style: buttonTextStyle ??
                     theme.textTheme.labelLarge!.copyWith(
-                        color:  AppColors.primaryMainColor,
+                        color:  AppColors.baseWhite,
                         fontSize: 19,
                         fontWeight: FontWeight.w700),
               ),
