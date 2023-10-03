@@ -14,10 +14,10 @@ class ChatScreen extends StatelessWidget {
       appBar: AppBar(
         titleSpacing: 0,
         elevation: Dimensions.tiny,
-        title: const Column(
+        title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Personal Finance Advisor',
               style: TextStyle(
                   color: AppColors.primaryMainColor,
@@ -27,8 +27,8 @@ class ChatScreen extends StatelessWidget {
             Text(
               '. Online',
               style: TextStyle(
-                  color: Color(0XFF3ABF38),
-                  fontSize: 20,
+                  color: Color(0XFF3ABF38).withOpacity(0.8),
+                  fontSize: 12,
                   fontWeight: FontWeight.w500),
             ),
           ],
