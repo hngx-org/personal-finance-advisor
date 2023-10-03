@@ -16,8 +16,10 @@ class CustomSmallTextField extends StatelessWidget {
       maxLength: maxLength,
       maxLines: maxLines,
       decoration: InputDecoration(
+        constraints: BoxConstraints(maxHeight: 100, maxWidth: 50),
         hintText: hintField,
         border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(50),
           borderSide: const BorderSide(
             color: Colors.black,
           ),

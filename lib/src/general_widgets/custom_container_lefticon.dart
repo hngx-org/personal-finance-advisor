@@ -38,7 +38,7 @@ class CustomContainerLeftIcon extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.baseWhite,
           border: Border.all(color: AppColors.gray500),
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(50),
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: Dimensions.medium),

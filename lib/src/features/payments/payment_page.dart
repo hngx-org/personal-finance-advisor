@@ -66,6 +66,7 @@ class PaymentPage extends StatelessWidget {
                     Column(
                       children: [
                         Text("Expiry Date"),
+                        Spacing.smallHeight(),
                         SizedBox(
                           width: 100.0, // width of the text form field
                           height: 50.0, // height of the text form field
@@ -78,9 +79,10 @@ class PaymentPage extends StatelessWidget {
                     Column(
                       children: [
                         Text("CVC"),
+                        Spacing.smallHeight(),
                         SizedBox(
-                          width: 100.0, // width of the text form field
-                          height: 50.0, // height of the text form field
+                          width: 100.0, 
+                          height: 50.0, 
                           child: CustomSmallTextField(
                             hintField: "cvc",
                           ),
@@ -90,73 +92,75 @@ class PaymentPage extends StatelessWidget {
                   ],
                 ),
                 const Spacing.smallHeight(),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       children: [
                         Text("Pin"),
+                        Spacing.smallHeight(),
                         SizedBox(
-                          width: 100.0, // width of the text form field
-                          height: 50.0, // height of the text form field
+                          width: 100.0, 
+                          height: 50.0, 
                           child: CustomSmallTextField(
                             hintField: "pin",
                           ),
                         ),
                       ],
                     ),
-                    Spacing.largeWidth(),
-                    Column(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Row(
-                          children: [
-                            Image(
-                              image: AssetImage("images/mastercard.png"),
-                              height: Dimensions.large,
-                              width: Dimensions.large,
-                            ),
-                            Spacing.mediumWidth(),
-                            Image(
-                              image: AssetImage("images/visa.png"),
-                              height: Dimensions.large,
-                              width: Dimensions.large,
-                            ),
-                            //   Image(
-                            //   image: AssetImage("images/americanexpress.png"),
-                            //   height: Dimensions.small,
-                            //   width: Dimensions.small,
-                            // ),
-                          ],
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                              maxWidth: Dimensions.large,
+                              maxHeight: Dimensions.large,
+                              minWidth: Dimensions.large,
+                              minHeight: Dimensions.large),
+                          child: Image(
+                            image: AssetImage("images/paypal.png"),
+                          ),
                         ),
-                        //
+                        Spacing.mediumWidth(),
+                        Spacing.largeWidth(),
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                              maxWidth: Dimensions.large,
+                              maxHeight: Dimensions.large,
+                              minWidth: Dimensions.large,
+                              minHeight: Dimensions.large),
+                          child: Image(
+                            image: AssetImage("images/googlepay.png"),
+                          ),
+                        ),
                       ],
                     ),
                   ],
                 ),
-                Align(
+                Spacing.bigHeight(),
+                Spacing.bigHeight(),
+                Spacing.bigHeight(),
+                CustomElevatedButton(
                   alignment: Alignment.bottomRight,
-                  child: CustomElevatedButton(
-                    text: " Pay",
-                    buttonTextStyle:
-                        const TextStyle(color: AppColors.baseWhite),
-                    width: MediaQuery.sizeOf(context).width * 0.4,
-                    height: MediaQuery.sizeOf(context).height * 0.05,
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => const ChatIntroScreen(),
-                          ));
-                    },
-                    buttonStyle: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                        const Color(0xFF3369FF),
-                      ),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              4.0), // border radius of 10 pixels
-                        ),
+                  text: " Pay",
+                  buttonTextStyle: const TextStyle(color: AppColors.baseWhite),
+                  width: MediaQuery.sizeOf(context).width * 0.4,
+                  height: MediaQuery.sizeOf(context).height * 0.05,
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const ChatIntroScreen(),
+                        ));
+                  },
+                  buttonStyle: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                      const Color(0xFF3369FF),
+                    ),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                            50), // border radius of 10 pixels
                       ),
                     ),
                   ),
