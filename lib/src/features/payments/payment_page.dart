@@ -16,7 +16,7 @@ class PaymentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue.shade50,
+      backgroundColor: AppColors.primaryMainColor.withOpacity(0.7),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -81,8 +81,8 @@ class PaymentPage extends StatelessWidget {
                         Text("CVC"),
                         Spacing.smallHeight(),
                         SizedBox(
-                          width: 100.0, 
-                          height: 50.0, 
+                          width: 100.0,
+                          height: 50.0,
                           child: CustomSmallTextField(
                             hintField: "cvc",
                           ),
@@ -100,8 +100,8 @@ class PaymentPage extends StatelessWidget {
                         Text("Pin"),
                         Spacing.smallHeight(),
                         SizedBox(
-                          width: 100.0, 
-                          height: 50.0, 
+                          width: 100.0,
+                          height: 50.0,
                           child: CustomSmallTextField(
                             hintField: "pin",
                           ),
@@ -113,24 +113,23 @@ class PaymentPage extends StatelessWidget {
                       children: [
                         ConstrainedBox(
                           constraints: BoxConstraints(
-                              maxWidth: Dimensions.large,
-                              maxHeight: Dimensions.large,
+                              maxWidth: 100,
+                              maxHeight: 250,
                               minWidth: Dimensions.large,
                               minHeight: Dimensions.large),
                           child: Image(
-                            image: AssetImage("images/paypal.png"),
+                            image: AssetImage("images/apple-pay.png"),
                           ),
                         ),
                         Spacing.mediumWidth(),
-                        Spacing.largeWidth(),
                         ConstrainedBox(
                           constraints: BoxConstraints(
-                              maxWidth: Dimensions.large,
-                              maxHeight: Dimensions.large,
+                              maxWidth: 100,
+                              maxHeight: 250,
                               minWidth: Dimensions.large,
                               minHeight: Dimensions.large),
                           child: Image(
-                            image: AssetImage("images/googlepay.png"),
+                            image: AssetImage("images/google-pay.png"),
                           ),
                         ),
                       ],

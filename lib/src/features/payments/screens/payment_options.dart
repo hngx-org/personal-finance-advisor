@@ -44,7 +44,7 @@ class PaymentOptions extends StatelessWidget {
                     ],
                     iconxbgcolor: AppColors.baseBlack,
                     iconxcolor: AppColors.baseWhite,
-                    planprice: r"$40",
+                    planprice: r"$0",
                     pricetext: "Per member, per month",
                     buttontext: "Start 14 day free trial",
                     onTap: () {
