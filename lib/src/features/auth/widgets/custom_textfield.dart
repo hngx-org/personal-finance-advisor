@@ -9,6 +9,8 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final void Function(String?)? onSaved;
   final TextInputType? keyboardType;
+  final bool hideText;
+  final Widget? visibilityIcon;
 
   const CustomTextField({
     super.key,
@@ -19,11 +21,14 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.onSaved,
     this.keyboardType,
+    required this.hideText,
+    this.visibilityIcon,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: hideText,
       controller: controller,
       validator: validator,
       onSaved: onSaved,
@@ -35,6 +40,7 @@ class CustomTextField extends StatelessWidget {
         color: Color(0xFF3C3C43),
       ),
       decoration: InputDecoration(
+        suffixIcon: visibilityIcon,
         contentPadding: const EdgeInsets.symmetric(
           vertical: 16,
           horizontal: 20,

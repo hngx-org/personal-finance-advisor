@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../core/utils/theme/colors.dart';
-
 import 'package:hng_authentication/authentication.dart';
 
+import '../../../core/utils/theme/colors.dart';
 import '../../../general_widgets/spacing.dart';
-import '../../payments/payment_page.dart';
 import '../../payments/screens/payment_options.dart';
 import '../widgets/custom_botton.dart';
 import '../widgets/custom_textfield.dart';
@@ -23,6 +21,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _usenameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool showPass = false;
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +80,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const Spacing.bigHeight(),
                 CustomTextField(
+                  hideText: false,
                   controller: _usenameController,
                   labelIcon: Icons.person,
                   labelText: 'Username',
@@ -96,6 +96,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const Spacing.mediumHeight(),
                 CustomTextField(
+                  hideText: false,
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   labelIcon: Icons.email,
@@ -121,6 +122,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   labelText: 'Password',
                   hintText: 'Enter your password',
                   labelIcon: Icons.key,
+                  hideText: showPass,
+                  visibilityIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        showPass = !showPass;
+                      });
+                    },
+                    icon: !showPass
+                        ? const Icon(
+                            Icons.remove_red_eye_rounded,
+                            color: Color(0xFF3C3C43),
+                            size: 20,
+                          )
+                        : const Icon(
+                            Icons.visibility_off_rounded,
+                            color: Color(0xFF3C3C43),
+                            size: 20,
+                          ),
+                  ),
                   validator: (value) {
                     if (value == null ||
                         value.isEmpty ||
