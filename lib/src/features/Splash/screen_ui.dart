@@ -9,7 +9,8 @@ class ScreenUI extends StatelessWidget {
     return Transform.scale(
       scale: 1.3,
       child: CustomImageView(
-        imagePath: 'images/logo.png',
+        imagePath: 'assets/images/splash_logo.gif',        
+        // imagePath: 'images/logo.png',
       ),
     );
   }

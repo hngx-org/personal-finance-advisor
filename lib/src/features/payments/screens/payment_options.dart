@@ -15,13 +15,10 @@ class PaymentOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.baseWhite,
       body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: Dimensions.small),
-          alignment: Alignment.center,
-          decoration: const BoxDecoration(
-            color: AppColors.baseWhite,
-          ),
+        child: Padding(
+          padding: const EdgeInsets.all(Dimensions.small),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -47,7 +44,7 @@ class PaymentOptions extends StatelessWidget {
                     ],
                     iconxbgcolor: AppColors.baseBlack,
                     iconxcolor: AppColors.baseWhite,
-                    planprice: r"$40",
+                    planprice: r"$0",
                     pricetext: "Per member, per month",
                     buttontext: "Start 14 day free trial",
                     onTap: () {
@@ -65,8 +62,8 @@ class PaymentOptions extends StatelessWidget {
                         """For individuals who want full experience of Finance Advisor""",
                     planprice: r"$49",
                     pricetext: "Per member, per month",
-                    containercolor: Colors.blueAccent,
-                    buttonColor: const Color(0xFFF9D783),
+                    containercolor: Colors.blueAccent.shade200,
+                    buttonColor: AppColors.baseWhite,
                     iconkbgcolor: AppColors.baseWhite,
                     iconkcolor: AppColors.baseBlack,
                     kcontent: const [
@@ -97,7 +94,7 @@ class PaymentOptions extends StatelessWidget {
                 // width: MediaQuery.sizeOf(context).width * 0.35,
                 buttonStyle: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
-                    const Color(0xFFF9D783),
+                    AppColors.primaryMainColor.withOpacity(0.8),
                   ),
                 ),
                 onTap: () {
