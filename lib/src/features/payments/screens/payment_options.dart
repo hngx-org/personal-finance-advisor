@@ -15,7 +15,7 @@ class PaymentOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: AppColors.primaryMainColor.withOpacity(0.8),
+      backgroundColor: AppColors.baseWhite,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(Dimensions.small),
@@ -62,8 +62,8 @@ class PaymentOptions extends StatelessWidget {
                         """For individuals who want full experience of Finance Advisor""",
                     planprice: r"$49",
                     pricetext: "Per member, per month",
-                    containercolor: AppColors.primaryMainColor,
-                    buttonColor: const Color(0xFFF9D783),
+                    containercolor: Colors.blueAccent.shade200,
+                    buttonColor: AppColors.baseWhite,
                     iconkbgcolor: AppColors.baseWhite,
                     iconkcolor: AppColors.baseBlack,
                     kcontent: const [
@@ -94,7 +94,7 @@ class PaymentOptions extends StatelessWidget {
                 // width: MediaQuery.sizeOf(context).width * 0.35,
                 buttonStyle: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
-                    const Color(0xFFF9D783),
+                    AppColors.primaryMainColor.withOpacity(0.8),
                   ),
                 ),
                 onTap: () {
