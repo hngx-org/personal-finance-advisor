@@ -7,7 +7,7 @@ import 'package:personal_finance_advisor/src/general_widgets/custom_text_with_cl
 import 'package:personal_finance_advisor/src/general_widgets/custom_text_with_tick.dart';
 import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
-class CustomPricingContainer extends StatelessWidget {
+class CustomPricingContainer extends StatefulWidget {
   final List<String>? xcontent;
   final List<String>? kcontent;
   final String buttontext;
@@ -43,141 +43,164 @@ class CustomPricingContainer extends StatelessWidget {
       this.iconxbgcolor});
 
   @override
+  State<CustomPricingContainer> createState() => _CustomPricingContainerState();
+}
+
+class _CustomPricingContainerState extends State<CustomPricingContainer> {
+  bool _isLifted = false;
+
+  void _toggleLift() {
+    setState(() {
+      _isLifted = !_isLifted;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.sizeOf(context).height * 0.7,
-      width: MediaQuery.sizeOf(context).width * 0.46,
-      decoration: BoxDecoration(
-        color: containercolor ?? Colors.white,
-        border: Border.all(color: Colors.deepPurple, width: 2),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
+    return GestureDetector(
+      onTap: _toggleLift,
+      child: AnimatedContainer(
+        alignment: _isLifted ? Alignment.topCenter : Alignment.center,
+        duration: const Duration(milliseconds: 1),
+        child: Transform.translate(
+          offset: _isLifted ? const Offset(5, 5) : const Offset(0, 0),
+          child: Container(
+            height: MediaQuery.sizeOf(context).height * 0.7,
+            width: MediaQuery.sizeOf(context).width * 0.46,
+            decoration: BoxDecoration(
+              color: widget.containercolor ?? Colors.white,
+              border: Border.all(color: Colors.deepPurple, width: 2),
+              borderRadius: BorderRadius.circular(8),
+            ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.18,
-                  padding: EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF1F1F1),
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Center(
-                    child: Text(
-                      plan!,
-                      style: TextStyle(
-                        color: AppColors.baseBlack,
-                        fontSize: Dimensions.smedium,
-                      ),
-                    ),
-                  ),
-                ),
-                Spacing.mediumHeight(),
-                Padding(
-                  padding: const EdgeInsets.all(Dimensions.small),
-                  child: Text(plantext ?? " Nothing",
-                      style: TextStyle(
-                        color: AppColors.baseBlack,
-                        fontSize: Dimensions.smedium,
-                        fontWeight: FontWeight.bold,
-                      )),
-                ),
-                Spacing.mediumHeight(),
-                Divider(
-                  color: Color(0xFF001C80),
-                  thickness: 2.0,
-                  endIndent: Checkbox.width,
-                  indent: Checkbox.width,
-                ),
-                Text.rich(
-                  TextSpan(
+                  child: Column(
                     children: [
-                      TextSpan(
-                        text: planprice,
-                        style: TextStyle(
-                          color: AppColors.baseBlack,
-                          fontSize: Dimensions.large,
-                          fontWeight: FontWeight.bold,
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.18,
+                        padding: EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFF1F1F1),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Center(
+                          child: Text(
+                            widget.plan!,
+                            style: TextStyle(
+                              color: AppColors.baseBlack,
+                              fontSize: Dimensions.smedium,
+                            ),
+                          ),
                         ),
                       ),
-                      TextSpan(
-                        text: '\n$pricetext',
-                        style: TextStyle(
-                            color: AppColors.baseBlack,
-                            fontSize: Dimensions.smedium),
+                      Spacing.mediumHeight(),
+                      Padding(
+                        padding: const EdgeInsets.all(Dimensions.small),
+                        child: Text(widget.plantext ?? " Nothing",
+                            style: TextStyle(
+                              color: AppColors.baseBlack,
+                              fontSize: Dimensions.smedium,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+                      Spacing.mediumHeight(),
+                      Divider(
+                        color: Color(0xFF001C80),
+                        thickness: 2.0,
+                        endIndent: Checkbox.width,
+                        indent: Checkbox.width,
+                      ),
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: widget.planprice,
+                              style: TextStyle(
+                                color: AppColors.baseBlack,
+                                fontSize: Dimensions.large,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextSpan(
+                              text: '\n${widget.pricetext}',
+                              style: TextStyle(
+                                  color: AppColors.baseBlack,
+                                  fontSize: Dimensions.smedium),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Divider(
+                        color: Color(0xFF001C80),
+                        thickness: 0.4,
+                        endIndent: Checkbox.width,
+                        indent: Checkbox.width,
                       ),
                     ],
                   ),
                 ),
-                Divider(
-                  color: Color(0xFF001C80),
-                  thickness: 0.4,
-                  endIndent: Checkbox.width,
-                  indent: Checkbox.width,
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: widget.kcontent!.length +
+                        (widget.xcontent?.length ?? 0), // the total number of items
+                    itemBuilder: (context, index) {
+                      if (index < widget.kcontent!.length) {
+                        // if the index is within the range of kcontent
+                        return CustomTickText(
+                          // return the custom tick text widget
+                          iconkbgcolor: widget.iconkbgcolor ?? AppColors.baseBlack,
+                          iconkcolor: widget.iconkcolor ?? AppColors.baseWhite,
+                          content: widget.kcontent![index],
+                        );
+                      } else {
+                        // otherwise, the index is within the range of xcontent
+                        return CustomCloseText(
+                          // return the custom close text widget
+                          iconxbgcolor: widget.iconxbgcolor ?? AppColors.baseBlack,
+                          iconxcolor: widget.iconxcolor ?? AppColors.baseWhite,
+                          contentx: widget.xcontent![index -
+                              widget.kcontent!
+                                  .length], // adjust the index to match the xcontent list
+                        );
+                      }
+                    },
+                    separatorBuilder: (context, index) {
+                      return SizedBox(height: 0.0); // zero height separator
+                    },
+                  ),
+                ),
+                Spacing.mediumHeight(),
+                Align(
+                  alignment: AlignmentDirectional.bottomCenter,
+                  child: CustomElevatedButton(
+                    text: widget.buttontext,
+                    buttonTextStyle: TextStyle(
+                      color: widget.buttontextcolor ?? AppColors.baseWhite,
+                      fontSize: Dimensions.small,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    onTap: widget.onTap,
+                    width: MediaQuery.sizeOf(context).width * 0.35,
+                    buttonStyle: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                          widget.buttonColor ?? AppColors.baseBlack),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: kcontent!.length +
-                  (xcontent?.length ?? 0), // the total number of items
-              itemBuilder: (context, index) {
-                if (index < kcontent!.length) {
-                  // if the index is within the range of kcontent
-                  return CustomTickText(
-                    // return the custom tick text widget
-                    iconkbgcolor: iconkbgcolor ?? AppColors.baseBlack,
-                    iconkcolor: iconkcolor ?? AppColors.baseWhite,
-                    content: kcontent![index],
-                  );
-                } else {
-                  // otherwise, the index is within the range of xcontent
-                  return CustomCloseText(
-                    // return the custom close text widget
-                    iconxbgcolor: iconxbgcolor ?? AppColors.baseBlack,
-                    iconxcolor: iconxcolor ?? AppColors.baseWhite,
-                    contentx: xcontent![index -
-                        kcontent!
-                            .length], // adjust the index to match the xcontent list
-                  );
-                }
-              },
-              separatorBuilder: (context, index) {
-                return SizedBox(height: 0.0); // zero height separator
-              },
-            ),
-          ),
-          Spacing.mediumHeight(),
-          Align(
-            alignment: AlignmentDirectional.bottomCenter,
-            child: CustomElevatedButton(
-              text: buttontext,
-              buttonTextStyle: TextStyle(
-                color: buttontextcolor ?? AppColors.baseWhite,
-                fontSize: Dimensions.small,
-                fontWeight: FontWeight.w600,
-              ),
-              onTap: onTap,
-              width: MediaQuery.sizeOf(context).width * 0.35,
-              buttonStyle: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(
-                    buttonColor ?? AppColors.baseBlack),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

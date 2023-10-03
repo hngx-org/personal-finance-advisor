@@ -1,3 +1,4 @@
+import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/theme_helper.dart';
 import 'package:personal_finance_advisor/src/general_widgets/base_button.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,7 @@ class CustomElevatedButton extends BaseButton {
                 text,
                 style: buttonTextStyle ??
                     theme.textTheme.labelLarge!.copyWith(
-                        color: const Color(0XFF3369FF),
+                        color:  AppColors.primaryMainColor,
                         fontSize: 19,
                         fontWeight: FontWeight.w700),
               ),
