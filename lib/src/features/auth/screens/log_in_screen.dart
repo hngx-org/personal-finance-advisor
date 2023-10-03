@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hng_authentication/authentication.dart';
 
+import 'package:personal_finance_advisor/src/features/chat/page/chat_screens.dart';
+
+import '../../../core/utils/theme/colors.dart';
 import '../../../general_widgets/spacing.dart';
-import '../../payments/payment_page.dart';
 import '../widgets/custom_botton.dart';
 import '../widgets/custom_textfield.dart';
 import 'sign_up_screen.dart';
@@ -16,7 +19,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _usenameController = TextEditingController();
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -37,13 +40,13 @@ class _LoginScreenState extends State<LoginScreen> {
           bottom: MediaQuery.viewInsetsOf(context).bottom / 36,
         ),
         height: MediaQuery.sizeOf(context).height,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xffe5b2ca),
-              Color(0xffcd82de),
+              AppColors.primaryMainColor.withOpacity(0.7),
+              AppColors.primaryMainColor,
             ],
           ),
         ),
@@ -76,21 +79,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const Spacing.bigHeight(),
-                CustomTextField(
-                  controller: _usenameController,
-                  labelIcon: Icons.person,
-                  labelText: 'Username',
-                  hintText: 'Enter your username',
-                  validator: (value) {
-                    if (value == null ||
-                        value.isEmpty ||
-                        value.trim().length <= 1) {
-                      return 'Please enter a valid username';
-                    }
-                    return null;
-                  },
-                ),
-                const Spacing.mediumHeight(),
                 CustomTextField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
@@ -128,15 +116,31 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const Spacing.largeHeight(),
                 CustomButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
+                      final email = _emailController.text;
+                      final password = _passwordController.text;
 
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const PaymentPage(),
-                        ),
-                      );
+                      final authRepository = Authentication();
+
+                      try {
+                        await authRepository.signIn(email, password);
+                        if (!mounted) return;
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const ChatScreen(),
+                          ),
+                        );
+                      } catch (ex) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              ex.toString(),
+                            ),
+                          ),
+                        );
+                      }
                     }
                   },
                   buttonText: 'Continue',
@@ -145,8 +149,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: Colors.white,
                     size: 16,
                   ),
-                  backgroundColor: const Color(0xFF78258B),
-                  shadowColor: const Color(0xffcd82de),
+                  backgroundColor: AppColors.primaryMainColor,
+                  shadowColor: Colors.white.withOpacity(0.1),
                 ),
                 const Spacing.largeHeight(),
                 Row(
@@ -185,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   buttonText: 'Create An Account',
                   backgroundColor: Colors.white.withOpacity(0.28),
-                  shadowColor: const Color(0xffcd82de),
+                  shadowColor: const Color(0xff9183de),
                 ),
                 const Spacing.bigHeight(),
               ],
