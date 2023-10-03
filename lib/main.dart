@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:personal_finance_advisor/src/features/Splash/slash_screen.dart';
+import 'package:personal_finance_advisor/src/features/Splash/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
