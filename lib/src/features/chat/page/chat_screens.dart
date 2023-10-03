@@ -12,8 +12,9 @@ class ChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        titleSpacing: 0,
+        titleSpacing: 24,
         elevation: Dimensions.tiny,
+        automaticallyImplyLeading: false,
         title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -25,10 +26,10 @@ class ChatScreen extends StatelessWidget {
                   fontWeight: FontWeight.w700),
             ),
             Text(
-              '. Online',
+              '• Online',
               style: TextStyle(
                   color: Color(0XFF3ABF38),
-                  fontSize: 20,
+                  fontSize: 16,
                   fontWeight: FontWeight.w500),
             ),
           ],
