@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:personal_finance_advisor/src/features/Login/login_page.dart';
+
+import 'package:personal_finance_advisor/src/features/auth/screens/sign_up_screen.dart';
 import 'package:personal_finance_advisor/src/features/onboarding/second_screen.dart';
 
 class FirstScreen extends StatelessWidget {
@@ -49,7 +50,7 @@ class FirstScreen extends StatelessWidget {
               // const SizedBox(
               //   height: 69,
               // ),
-              Spacer(),
+              const Spacer(),
 
               //navigation in row
               Row(
@@ -60,7 +61,7 @@ class FirstScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
+                          builder: (context) => const SignUpScreen(),
                         ),
                       );
                     },
@@ -91,7 +92,7 @@ class FirstScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Spacer()
+              const Spacer()
             ],
           ),
         ),

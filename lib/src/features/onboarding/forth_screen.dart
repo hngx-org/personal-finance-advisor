@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:personal_finance_advisor/src/features/Login/login_page.dart';
+
+import 'package:personal_finance_advisor/src/features/auth/screens/sign_up_screen.dart';
 
 class ForthScreen extends StatelessWidget {
   const ForthScreen({super.key});
@@ -48,7 +49,7 @@ class ForthScreen extends StatelessWidget {
               // const SizedBox(
               //   height: 69,
               // ),
-              Spacer(),
+              const Spacer(),
 
               //navigation in row
               Row(
@@ -59,7 +60,7 @@ class ForthScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
+                          builder: (context) => const SignUpScreen(),
                         ),
                       );
                     },
@@ -76,7 +77,7 @@ class ForthScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const LoginPage(),
+                          builder: (context) => const SignUpScreen(),
                         ),
                       );
                     },
@@ -90,7 +91,7 @@ class ForthScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Spacer()
+              const Spacer()
             ],
           ),
         ),

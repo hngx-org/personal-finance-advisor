@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../../core/utils/theme/colors.dart';
+
+import 'package:hng_authentication/authentication.dart';
 
 import '../../../general_widgets/spacing.dart';
 import '../../payments/payment_page.dart';
+import '../../payments/screens/payment_options.dart';
 import '../widgets/custom_botton.dart';
 import '../widgets/custom_textfield.dart';
 import 'log_in_screen.dart';
@@ -37,13 +41,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
           bottom: MediaQuery.viewInsetsOf(context).bottom / 36,
         ),
         height: MediaQuery.sizeOf(context).height,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xff9183de),
-              Color(0xffa094e3),
+              AppColors.primaryMainColor.withOpacity(0.7),
+              AppColors.primaryMainColor,
             ],
           ),
         ),
@@ -128,20 +132,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const Spacing.largeHeight(),
                 CustomButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
+                      final email = _emailController.text;
+                      final password = _passwordController.text;
+                      final name = _usenameController.text;
+                      final authRepository = Authentication();
 
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const PaymentPage(),
-                        ),
-                      );
+                      // print(data);
+
+                      try {
+                        await authRepository.signUp(email, name, password);
+                        if (!mounted) return;
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const PaymentOptions(),
+                          ),
+                        );
+                      } catch (ex) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              ex.toString(),
+                            ),
+                          ),
+                        );
+                      }
                     }
                   },
                   buttonText: 'Create An Account',
-                  backgroundColor: const Color(0xFF52439A),
-                  shadowColor: const Color(0xff9183de),
+                  backgroundColor: AppColors.primaryMainColor,
+                  shadowColor: Colors.white.withOpacity(0.1),
                 ),
                 const Spacing.largeHeight(),
                 Row(
