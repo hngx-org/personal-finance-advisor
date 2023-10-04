@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:in_app_payment/buttons/pay_buttons.dart';
 import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
@@ -18,10 +19,20 @@ class PaymentOptions extends StatefulWidget {
 }
 
 class _PaymentOptionsState extends State<PaymentOptions> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        backgroundColor: Colors.blueAccent,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.white,
+          statusBarIconBrightness: Brightness.dark,
+        ),
+        title: Text(
+          "Choose your payment option",
+        ),
+      ),
       backgroundColor: AppColors.baseWhite,
       body: SafeArea(
         child: Padding(
@@ -29,13 +40,12 @@ class _PaymentOptionsState extends State<PaymentOptions> {
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              
               // Add the title as the first child of the column
-              const Text(
-                "Choose your payment option",
-                style: TextStyle(color: AppColors.baseBlack, fontSize: 24.0),
-              ),
-              Spacing.mediumHeight(),
+              // const Text(
+              //   "Choose your payment option",
+              //   style: TextStyle(color: AppColors.baseBlack, fontSize: 24.0, fontWeight: FontWeight.bold),
+              // ),
+              const Spacing.largeHeight(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -97,23 +107,24 @@ class _PaymentOptionsState extends State<PaymentOptions> {
               //   "Try our 100% free plan",
               //   style: TextStyle(color: AppColors.baseBlack, fontSize: 16.0),
               // ),
-            //   CustomElevatedButton(
-            //     margin: const EdgeInsets.symmetric(horizontal: 100),
-            //     text: "Sign up today",
-            //     // width: MediaQuery.sizeOf(context).width * 0.35,
-            //     buttonStyle: ButtonStyle(
-            //       backgroundColor: MaterialStateProperty.all<Color>(
-            //         AppColors.primaryMainColor.withOpacity(0.8),
-            //       ),
-            //     ),
-            //     onTap: () {
-            //       Navigator.push(
-            //           context,
-            //           CupertinoPageRoute(
-            //             builder: (context) => const PaymentPage(),
-            //           ));
-            //     },
-            //   ),
+              //   CustomElevatedButton(
+              //     margin: const EdgeInsets.symmetric(horizontal: 100),
+              //     text: "Sign up today",
+              //     // width: MediaQuery.sizeOf(context).width * 0.35,
+              //     buttonStyle: ButtonStyle(
+              //       backgroundColor: MaterialStateProperty.all<Color>(
+              //         AppColors.primaryMainColor.withOpacity(0.8),
+              //       ),
+              //     ),
+              //     onTap: () {
+              //       Navigator.push(
+              //           context,
+              //           CupertinoPageRoute(
+              //             builder: (context) => const PaymentPage(),
+              //           ));
+              //     },
+              //   ),
+              Spacer(),
             ],
           ),
         ),
