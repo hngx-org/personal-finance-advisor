@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
+import 'package:personal_finance_advisor/src/core/utils/theme/text_styles.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/theme_helper.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_elevated_button.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_text_with_close.dart';
@@ -80,7 +81,7 @@ class _CustomPricingContainerState extends State<CustomPricingContainer> {
                   child: Column(
                     children: [
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.18,
+                        width: MediaQuery.of(context).size.width * 0.25,
                         padding: EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
                           color: Color(0xFFF1F1F1),
@@ -89,9 +90,8 @@ class _CustomPricingContainerState extends State<CustomPricingContainer> {
                         child: Center(
                           child: Text(
                             widget.plan!,
-                            style: TextStyle(
+                            style: AppTextStyles.textMdMedium.copyWith(
                               color: AppColors.baseBlack,
-                              fontSize: Dimensions.smedium,
                             ),
                           ),
                         ),
@@ -147,13 +147,15 @@ class _CustomPricingContainerState extends State<CustomPricingContainer> {
                   child: ListView.separated(
                     shrinkWrap: true,
                     itemCount: widget.kcontent!.length +
-                        (widget.xcontent?.length ?? 0), // the total number of items
+                        (widget.xcontent?.length ??
+                            0), // the total number of items
                     itemBuilder: (context, index) {
                       if (index < widget.kcontent!.length) {
                         // if the index is within the range of kcontent
                         return CustomTickText(
                           // return the custom tick text widget
-                          iconkbgcolor: widget.iconkbgcolor ?? AppColors.baseBlack,
+                          iconkbgcolor:
+                              widget.iconkbgcolor ?? AppColors.baseBlack,
                           iconkcolor: widget.iconkcolor ?? AppColors.baseWhite,
                           content: widget.kcontent![index],
                         );
@@ -161,7 +163,8 @@ class _CustomPricingContainerState extends State<CustomPricingContainer> {
                         // otherwise, the index is within the range of xcontent
                         return CustomCloseText(
                           // return the custom close text widget
-                          iconxbgcolor: widget.iconxbgcolor ?? AppColors.baseBlack,
+                          iconxbgcolor:
+                              widget.iconxbgcolor ?? AppColors.baseBlack,
                           iconxcolor: widget.iconxcolor ?? AppColors.baseWhite,
                           contentx: widget.xcontent![index -
                               widget.kcontent!
@@ -178,14 +181,14 @@ class _CustomPricingContainerState extends State<CustomPricingContainer> {
                 Align(
                   alignment: AlignmentDirectional.bottomCenter,
                   child: CustomElevatedButton(
+                    width: MediaQuery.sizeOf(context).width * 0.4,
                     text: widget.buttontext,
                     buttonTextStyle: TextStyle(
                       color: widget.buttontextcolor ?? AppColors.baseWhite,
-                      fontSize: Dimensions.small,
+                      fontSize: 10,
                       fontWeight: FontWeight.w600,
                     ),
                     onTap: widget.onTap,
-                    width: MediaQuery.sizeOf(context).width * 0.35,
                     buttonStyle: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                           widget.buttonColor ?? AppColors.baseBlack),

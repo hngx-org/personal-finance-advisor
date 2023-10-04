@@ -1,19 +1,43 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
+import 'package:personal_finance_advisor/src/core/utils/app_enums.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_image_view.dart';
 import 'package:personal_finance_advisor/src/general_widgets/general_widgets_exports.dart';
 import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
-class ChatScreen extends StatelessWidget {
+import '../notifiers/chat_notifiers.dart';
+
+class ChatScreen extends ConsumerStatefulWidget {
   const ChatScreen({super.key});
 
   @override
+  ConsumerState<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends ConsumerState<ChatScreen> {
+  final _chatCont = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async{
+     await ref.read(chatProvider.notifier).chatHistory(_chatCont.text);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final state = ref.watch(chatProvider);
+    final notifer = ref.watch(chatProvider.notifier);
     return Scaffold(
       appBar: AppBar(
-        titleSpacing: 0,
+        titleSpacing: 24,
         elevation: Dimensions.tiny,
+        automaticallyImplyLeading: false,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -25,7 +49,7 @@ class ChatScreen extends StatelessWidget {
                   fontWeight: FontWeight.w700),
             ),
             Text(
-              '. Online',
+              '• Online',
               style: TextStyle(
                   color: Color(0XFF3ABF38).withOpacity(0.8),
                   fontSize: 12,
@@ -37,64 +61,107 @@ class ChatScreen extends StatelessWidget {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
-          children: [
-            const Spacing.mediumHeight(),
-            CustomImageView(
-              height: 24,
-              width: 24,
-              imagePath: 'assets/images/explain.png',
-            ),
-            const Center(
-                child: Text(
-              'Explain',
-              style: TextStyle(
-                  color: Color(0XFF3F3F3F),
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14),
-            )),
-            const Spacing.mediumHeight(),
-            const DummyQuestionCont(
-                text: 'What is the difference between stocks and bonds?'),
-            const DummyQuestionCont(
-                text: 'Explain the concept of compound interest.'),
-            const Spacing.bigHeight(),
-            CustomImageView(
-              height: 24,
-              width: 24,
-              svgPath: 'assets/images/edit.svg',
-            ),
-            const Center(
-                child: Text(
-              'Write & edit',
-              style: TextStyle(
-                  color: Color(0XFF3F3F3F),
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14),
-            )),
-            const Spacing.mediumHeight(),
-            const DummyQuestionCont(
-                text: 'What are the key principles of financial planning?'),
-            const DummyQuestionCont(text: '"How does credit scoring work?'),
-            const Spacing.bigHeight(),
-            CustomImageView(
-              height: 24,
-              width: 24,
-              svgPath: 'assets/images/translate.svg',
-            ),
-            const Center(
-                child: Text(
-              'Translate',
-              style: TextStyle(
-                  color: Color(0XFF3F3F3F),
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14),
-            )),
-            const Spacing.mediumHeight(),
-            const DummyQuestionCont(
-                text: 'What is the role of a financial advisor?'),
-            const DummyQuestionCont(
-                text: 'Discuss the pros and cons of investing in real estate'),
-          ],
+          children: _chatCont.text.isNotEmpty
+              ? [
+                  const Spacing.mediumHeight(),
+                  Text('Chat History'),
+                  const Spacing.smallHeight(),
+                  (state.history ?? []).isEmpty
+                      ? Text('No History')
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: (state.history ?? []).length,
+                          itemBuilder: (context, index) {
+                            final text = (state.history ?? [])[index];
+                            return DummyQuestionCont(
+                              text: text,
+                            );
+                          }),
+                  DummyQuestionCont(
+                    text: _chatCont.text,
+                  ),
+                  DummyQuestionCont(
+                    text: state.errorMessage,
+                  ),
+                  state.loadState == LoadState.loading
+                      ? Center(
+                          child: CupertinoActivityIndicator(
+                            color: AppColors.primaryMainColor,
+                          ),
+                        )
+                      : SizedBox(),
+                  const Spacing.smallHeight(),
+                ]
+              : [
+                  const Spacing.mediumHeight(),
+                  CustomImageView(
+                    height: 24,
+                    width: 24,
+                    imagePath: 'assets/images/explain.png',
+                  ),
+                  const Center(
+                      child: Text(
+                    'Explain',
+                    style: TextStyle(
+                        color: Color(0XFF3F3F3F),
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14),
+                  )),
+                  const Spacing.mediumHeight(),
+                  const DummyQuestionCont(
+                      text: 'What is the difference between stocks and bonds?'),
+                  const DummyQuestionCont(
+                      text: 'Explain the concept of compound interest.'),
+                  const Spacing.bigHeight(),
+                  CustomImageView(
+                    height: 24,
+                    width: 24,
+                    svgPath: 'assets/images/edit.svg',
+                  ),
+                  const Center(
+                      child: Text(
+                    'Write & edit',
+                    style: TextStyle(
+                        color: Color(0XFF3F3F3F),
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14),
+                  )),
+                  const Spacing.mediumHeight(),
+                  const DummyQuestionCont(
+                      text:
+                          'What are the key principles of financial planning?'),
+                  const DummyQuestionCont(
+                      text: '"How does credit scoring work?'),
+                  const Spacing.bigHeight(),
+                  CustomImageView(
+                    height: 24,
+                    width: 24,
+                    svgPath: 'assets/images/translate.svg',
+                  ),
+                  const Center(
+                      child: Text(
+                    'Translate',
+                    style: TextStyle(
+                        color: Color(0XFF3F3F3F),
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14),
+                  )),
+                  const Spacing.mediumHeight(),
+                  const DummyQuestionCont(
+                      text: 'What is the role of a financial advisor?'),
+                  const DummyQuestionCont(
+                      text:
+                          'Discuss the pros and cons of investing in real estate'),
+                  const Spacing.smallHeight(),
+                  state.loadState == LoadState.loading
+                      ? Center(
+                          child: CupertinoActivityIndicator(
+                            color: AppColors.primaryMainColor,
+                          ),
+                        )
+                      : SizedBox(),
+                  const Spacing.smallHeight(),
+                ],
         ),
       ),
       bottomNavigationBar: Container(
@@ -105,6 +172,7 @@ class ChatScreen extends StatelessWidget {
         padding: const EdgeInsets.all(Dimensions.medium),
         margin: MediaQuery.of(context).viewInsets,
         child: AppTextField(
+          controller: _chatCont,
           hintText: 'Let me give you financial advice',
           borderRadius: 30,
           suffixIcon: Padding(
@@ -121,6 +189,13 @@ class ChatScreen extends StatelessWidget {
                 CustomImageView(
                   height: 24,
                   width: 24,
+                  onTap: () {
+                    setState(() {});
+                    debugPrint('In Chat field');
+                    notifer.sendChat(_chatCont.text);
+
+                    _chatCont.clear();
+                  },
                   svgPath: 'assets/images/send.svg',
                 ),
               ],

@@ -22,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool showPass = false;
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const Spacing.bigHeight(),
                 CustomTextField(
+                  hideText: false,
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   labelIcon: Icons.email,
@@ -100,6 +102,25 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const Spacing.mediumHeight(),
                 CustomTextField(
+                  hideText: !showPass,
+                  visibilityIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        showPass = !showPass;
+                      });
+                    },
+                    icon: showPass
+                        ? const Icon(
+                            Icons.remove_red_eye_rounded,
+                            color: Color(0xFF3C3C43),
+                            size: 20,
+                          )
+                        : const Icon(
+                            Icons.visibility_off_rounded,
+                            color: Color(0xFF3C3C43),
+                            size: 20,
+                          ),
+                  ),
                   controller: _passwordController,
                   keyboardType: TextInputType.visiblePassword,
                   labelText: 'Password',
@@ -127,10 +148,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       try {
                         await authRepository.signIn(email, password);
                         if (!mounted) return;
-                        Navigator.of(context).push(
+                        Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                             builder: (context) => const ChatScreen(),
                           ),
+                          ModalRoute.withName('/'),
                         );
                       } catch (ex) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -182,10 +204,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const Spacing.largeHeight(),
                 CustomButton(
-                  onPressed: () => Navigator.of(context).push(
+                  onPressed: () => Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
                       builder: (context) => const SignUpScreen(),
                     ),
+                    ModalRoute.withName('/'),
                   ),
                   buttonText: 'Create An Account',
                   backgroundColor: Colors.white.withOpacity(0.28),

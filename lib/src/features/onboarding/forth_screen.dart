@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:personal_finance_advisor/src/features/auth/screens/sign_up_screen.dart';
+import 'package:personal_finance_advisor/src/features/onboarding/third_screen.dart';
 
 class ForthScreen extends StatelessWidget {
   const ForthScreen({super.key});
@@ -9,6 +10,7 @@ class ForthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 202, 220, 253),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -53,32 +55,16 @@ class ForthScreen extends StatelessWidget {
 
               //navigation in row
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
+                      Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const SignUpScreen(),
                         ),
-                      );
-                    },
-                    child: const Text(
-                      '',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF0E2C66)),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SignUpScreen(),
-                        ),
+                        ModalRoute.withName('/'),
                       );
                     },
                     child: const Text(
