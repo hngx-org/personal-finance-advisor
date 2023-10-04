@@ -122,14 +122,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   labelText: 'Password',
                   hintText: 'Enter your password',
                   labelIcon: Icons.key,
-                  hideText: showPass,
+                  hideText: !showPass,
                   visibilityIcon: IconButton(
                     onPressed: () {
                       setState(() {
                         showPass = !showPass;
                       });
                     },
-                    icon: !showPass
+                    icon: showPass
                         ? const Icon(
                             Icons.remove_red_eye_rounded,
                             color: Color(0xFF3C3C43),
