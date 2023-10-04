@@ -102,14 +102,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const Spacing.mediumHeight(),
                 CustomTextField(
-                  hideText: showPass,
+                  hideText: !showPass,
                   visibilityIcon: IconButton(
                     onPressed: () {
                       setState(() {
                         showPass = !showPass;
                       });
                     },
-                    icon: !showPass
+                    icon: showPass
                         ? const Icon(
                             Icons.remove_red_eye_rounded,
                             color: Color(0xFF3C3C43),
