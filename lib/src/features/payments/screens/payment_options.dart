@@ -24,6 +24,7 @@ class _PaymentOptionsState extends State<PaymentOptions> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
+        //add leading automatically icon
         backgroundColor: Colors.blueAccent,
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.white,
