@@ -6,9 +6,7 @@ import 'package:personal_finance_advisor/src/core/utils/theme/text_styles.dart';
 import 'package:personal_finance_advisor/src/features/chat/page/chat_intro_screen.dart';
 import 'package:personal_finance_advisor/src/general_widgets/Custom_Small_Text_Form.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_container_lefticon.dart';
-import 'package:personal_finance_advisor/src/general_widgets/custom_container_text_field.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_elevated_button.dart';
-import 'package:personal_finance_advisor/src/general_widgets/custom_image_view.dart';
 import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
 class PaymentPage extends StatelessWidget {
@@ -119,6 +117,7 @@ class PaymentPage extends StatelessWidget {
                               minHeight: Dimensions.large),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(50.0),
+                          
                             child: const Image(
                               image: AssetImage("images/google-pay.png"),
                             ),
