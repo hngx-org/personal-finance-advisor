@@ -119,6 +119,7 @@ class PaymentPage extends StatelessWidget {
                               minHeight: Dimensions.large),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(50.0),
+                          
                             child: const Image(
                               image: AssetImage("images/google-pay.png"),
                             ),
