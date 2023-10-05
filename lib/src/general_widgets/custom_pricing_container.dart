@@ -15,7 +15,7 @@ class CustomPricingContainer extends StatefulWidget {
   final List<String>? kcontent;
   final String buttontext;
   final VoidCallback? onTap;
-  final Color? containercolor;
+  final Color? containercolor;  
   final Color? buttonColor;
   final Color? buttontextcolor;
   final String? plan;
