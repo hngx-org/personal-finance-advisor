@@ -1,32 +1,52 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:in_app_payment/buttons/pay_buttons.dart';
 import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
-import 'package:personal_finance_advisor/src/core/utils/theme/text_styles.dart';
 import 'package:personal_finance_advisor/src/features/chat/page/chat_intro_screen.dart';
 import 'package:personal_finance_advisor/src/features/payments/payment_page.dart';
+import 'package:personal_finance_advisor/src/features/payments/screens/payWith.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_elevated_button.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_pricing_container.dart';
 import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
-class PaymentOptions extends StatelessWidget {
+class PaymentOptions extends StatefulWidget {
   const PaymentOptions({super.key});
 
   @override
+  State<PaymentOptions> createState() => _PaymentOptionsState();
+}
+
+class _PaymentOptionsState extends State<PaymentOptions> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        //add leading automatically icon
+        backgroundColor: Colors.blueAccent,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.white,
+          statusBarIconBrightness: Brightness.dark,
+        ),
+        title: Text(
+          "Choose your payment option",
+        ),
+      ),
       backgroundColor: AppColors.baseWhite,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(Dimensions.small),
+          padding: const EdgeInsets.symmetric(horizontal: Dimensions.small),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               // Add the title as the first child of the column
-              const Text(
-                "Choose your payment option",
-                style: TextStyle(color: AppColors.baseBlack, fontSize: 24.0),
-              ),
+              // const Text(
+              //   "Choose your payment option",
+              //   style: TextStyle(color: AppColors.baseBlack, fontSize: 24.0, fontWeight: FontWeight.bold),
+              // ),
+              const Spacing.largeHeight(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -48,11 +68,13 @@ class PaymentOptions extends StatelessWidget {
                     pricetext: "Per member, per month",
                     buttontext: "Start 14 day free trial",
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => const ChatIntroScreen(),
-                          ));
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const ChatIntroScreen(),
+                        ),
+                        (route) => false,
+                      );
                     },
                   ),
                   // const Spacing.smallWidth(),
@@ -77,34 +99,35 @@ class PaymentOptions extends StatelessWidget {
                       Navigator.push(
                           context,
                           CupertinoPageRoute(
-                            builder: (context) => const PaymentPage(),
+                            builder: (context) => PayWith(),
                           ));
                     },
                   ),
                 ],
               ),
               // Add some more text as the last child of the column
-              const Text(
-                "Try our 100% free plan",
-                style: TextStyle(color: AppColors.baseBlack, fontSize: 16.0),
-              ),
-              CustomElevatedButton(
-                margin: const EdgeInsets.symmetric(horizontal: 100),
-                text: "Sign up today",
-                // width: MediaQuery.sizeOf(context).width * 0.35,
-                buttonStyle: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    AppColors.primaryMainColor.withOpacity(0.8),
-                  ),
-                ),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => const PaymentPage(),
-                      ));
-                },
-              ),
+              // const Text(
+              //   "Try our 100% free plan",
+              //   style: TextStyle(color: AppColors.baseBlack, fontSize: 16.0),
+              // ),
+              //   CustomElevatedButton(
+              //     margin: const EdgeInsets.symmetric(horizontal: 100),
+              //     text: "Sign up today",
+              //     // width: MediaQuery.sizeOf(context).width * 0.35,
+              //     buttonStyle: ButtonStyle(
+              //       backgroundColor: MaterialStateProperty.all<Color>(
+              //         AppColors.primaryMainColor.withOpacity(0.8),
+              //       ),
+              //     ),
+              //     onTap: () {
+              //       Navigator.push(
+              //           context,
+              //           CupertinoPageRoute(
+              //             builder: (context) => const PaymentPage(),
+              //           ));
+              //     },
+              //   ),
+              Spacer(),
             ],
           ),
         ),

@@ -70,7 +70,7 @@ class _CustomPricingContainerState extends State<CustomPricingContainer> {
             width: MediaQuery.sizeOf(context).width * 0.46,
             decoration: BoxDecoration(
               color: widget.containercolor ?? Colors.white,
-              border: Border.all(color: Colors.deepPurple, width: 2),
+              border: Border.all(color: Colors.blueAccent, width: 2),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Column(
@@ -85,7 +85,7 @@ class _CustomPricingContainerState extends State<CustomPricingContainer> {
                         padding: EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
                           color: Color(0xFFF1F1F1),
-                          borderRadius: BorderRadius.circular(10.0),
+                          borderRadius: BorderRadius.circular(50.0),
                         ),
                         child: Center(
                           child: Text(
@@ -102,7 +102,7 @@ class _CustomPricingContainerState extends State<CustomPricingContainer> {
                         child: Text(widget.plantext ?? " Nothing",
                             style: TextStyle(
                               color: AppColors.baseBlack,
-                              fontSize: Dimensions.smedium,
+                              fontSize: Dimensions.medium,
                               fontWeight: FontWeight.bold,
                             )),
                       ),
@@ -194,7 +194,7 @@ class _CustomPricingContainerState extends State<CustomPricingContainer> {
                           widget.buttonColor ?? AppColors.baseBlack),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(50),
                         ),
                       ),
                     ),

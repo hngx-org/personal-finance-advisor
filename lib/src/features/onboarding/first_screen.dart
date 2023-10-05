@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:personal_finance_advisor/src/features/auth/screens/sign_up_screen.dart';
@@ -10,8 +11,14 @@ class FirstScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+    );
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 202, 220, 253),
+      backgroundColor: const Color.fromARGB(255, 202, 220, 253),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -65,7 +72,7 @@ class FirstScreen extends StatelessWidget {
                         MaterialPageRoute(
                           builder: (context) => const SignUpScreen(),
                         ),
-                        ModalRoute.withName('/'),
+                        (route) => false,
                       );
                     },
                     child: const Text(
