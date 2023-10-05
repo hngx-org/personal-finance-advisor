@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hng_authentication/authentication.dart';
+import 'package:personal_finance_advisor/src/core/helper_fxn.dart';
 
 import '../../../core/utils/theme/colors.dart';
 import '../../../general_widgets/spacing.dart';
@@ -12,6 +13,8 @@ import 'log_in_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
+
+  static String cookies = '';
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -39,7 +42,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       final authRepository = Authentication();
 
       try {
-        await authRepository.signUp(email, name, password);
+              final userData =
+                            await authRepository.signUp(email, name, password);
+                        SignUpScreen.cookies = userData?.cookie ?? "";
+
+                        toastMessage('Welcome ${userData?.name ?? ""}');
         if (!mounted) return;
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
@@ -47,14 +54,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           (route) => false,
         );
-      } catch (ex) {
+      }on ApiException catch (ex) {
         setState(() {
           _isSending = false;
         });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              ex.toString(),
+              ex.message,
             ),
             duration: const Duration(seconds: 3),
           ),
@@ -131,11 +138,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     validator: (value) {
                       // Regular expression to match alphanumeric characters and optional underscore
                       final RegExp usernameRegex = RegExp(r'^[a-zA-Z0-9_]+$');
-
                       if (value == null || value.isEmpty || value.length < 2) {
                         return 'Username must be at least 2 characters long';
                       }
-
                       if (!usernameRegex.hasMatch(value)) {
                         return 'Alphanumeric characters & underscores only';
                       }

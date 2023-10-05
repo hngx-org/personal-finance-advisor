@@ -39,7 +39,12 @@ dependencies:
   hooks_riverpod: ^2.3.6
   intl: ^0.18.0
   hng_authentication: ^0.1.4
+  hngx_openai:
+    git:
+      url: https://github.com/hngx-org/openai-package.git
+      ref: main
   in_app_payment: ^0.0.1
+
 
 dev_dependencies:
 
