@@ -1,24 +1,29 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hng_authentication/authentication.dart';
-import 'package:personal_finance_advisor/src/features/auth/widgets/dotted_line_w_text.dart';
 
-import 'package:personal_finance_advisor/src/features/chat/page/chat_screens.dart';
-
+import '../../../core/helper_fxn.dart';
 import '../../../core/utils/theme/colors.dart';
 import '../../../general_widgets/spacing.dart';
+import '../../chat/page/chat_screens.dart';
+import '../providers/user_provider.dart';
 import '../widgets/custom_botton.dart';
 import '../widgets/custom_textfield.dart';
+import '../widgets/dotted_line_w_text.dart';
 import 'sign_up_screen.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
+  static String cookies = '';
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _emailController = TextEditingController();
@@ -27,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isSending = false;
 
   Future<void> _logInUser() async {
+    FocusManager.instance.primaryFocus?.unfocus(); // dismiss keyboard
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isSending = true;
@@ -39,7 +45,15 @@ class _LoginScreenState extends State<LoginScreen> {
       final authRepository = Authentication();
 
       try {
-        await authRepository.signIn(email, password);
+        final userData = await authRepository.signIn(email, password);
+        ref.read(userProvider.notifier).setUser({
+          'id': userData?.id ?? "",
+          'name': userData?.name ?? "",
+          'email': userData?.email ?? "",
+        });
+        log('Data retrieved => ${userData.toString}');
+        toastMessage('Welcome Back ${userData?.name ?? ""}');
+        LoginScreen.cookies = userData.cookie;
         if (!mounted) return;
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
@@ -47,16 +61,27 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           (route) => false,
         );
-      } catch (ex) {
+      } on ApiException catch (ex) {
         setState(() {
           _isSending = false;
         });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              ex.toString(),
+              ex.message,
             ),
             duration: const Duration(seconds: 3),
+          ),
+        );
+      } catch (otherExceptions) {
+        setState(() {
+          _isSending = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              otherExceptions.toString(),
+            ),
           ),
         );
       }
@@ -65,6 +90,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userDetails = ref.watch(userProvider);
+    debugPrint(userDetails.toString()); // Testing
+
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,

@@ -1,4 +1,3 @@
-import 'package:personal_finance_advisor/src/core/utils/theme/app_decoration.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
 import 'package:flutter/material.dart';
 

@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hng_authentication/authentication.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:personal_finance_advisor/src/core/helper_fxn.dart';
 import '../../../core/utils/theme/colors.dart';
 import '../../../general_widgets/spacing.dart';
 import '../../payments/screens/payment_options.dart';
+import '../providers/user_provider.dart';
 import '../widgets/custom_botton.dart';
 import '../widgets/custom_textfield.dart';
 import '../widgets/dotted_line_w_text.dart';
 import 'log_in_screen.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
 
+  static String cookies = '';
+
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  ConsumerState<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -26,6 +30,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _isSending = false;
 
   Future<void> _signUpUser() async {
+    FocusManager.instance.primaryFocus?.unfocus(); // dismiss keyboard
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isSending = true;
@@ -39,7 +44,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
       final authRepository = Authentication();
 
       try {
-        await authRepository.signUp(email, name, password);
+        final userData = await authRepository.signUp(email, name, password);
+        ref.read(userProvider.notifier).setUser({
+          'id': userData?.id ?? "",
+          'name': userData?.name ?? "",
+          'email': userData?.email ?? "",
+        });
+
+        debugPrint('User cookie : ${userData?.cookie}');
+        debugPrint('User cookie : ${userData?.email}');
+        debugPrint('User cookie : ${userData?.name}');
+        debugPrint('User cookie : ${userData?.credits}');
+        SignUpScreen.cookies = userData?.cookie ?? "";
+
+        toastMessage('Welcome ${userData?.name ?? ""}');
         if (!mounted) return;
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
@@ -47,16 +65,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           (route) => false,
         );
-      } catch (ex) {
+      } on ApiException catch (ex) {
         setState(() {
           _isSending = false;
         });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              ex.toString(),
+              ex.message,
             ),
             duration: const Duration(seconds: 3),
+          ),
+        );
+      } catch (otherExceptions) {
+        setState(() {
+          _isSending = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              otherExceptions.toString(),
+            ),
           ),
         );
       }
@@ -65,6 +94,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userDetails = ref.watch(userProvider);
+
+    debugPrint(userDetails.toString()); // Testing
+
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -131,11 +164,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     validator: (value) {
                       // Regular expression to match alphanumeric characters and optional underscore
                       final RegExp usernameRegex = RegExp(r'^[a-zA-Z0-9_]+$');
-
                       if (value == null || value.isEmpty || value.length < 2) {
                         return 'Username must be at least 2 characters long';
                       }
-
                       if (!usernameRegex.hasMatch(value)) {
                         return 'Alphanumeric characters & underscores only';
                       }
@@ -202,7 +233,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   const Spacing.largeHeight(),
                   CustomButton(
-                    onPressed: _signUpUser,
+                    onPressed: _isSending ? null : _signUpUser,
                     buttonContent: _isSending
                         ? const SizedBox(
                             height: 24,

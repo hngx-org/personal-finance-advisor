@@ -3,7 +3,7 @@ import 'package:personal_finance_advisor/src/core/utils/theme/theme_helper.dart'
 import 'package:flutter/material.dart';
 
 class CustomSearchView extends StatelessWidget {
-  CustomSearchView({
+  const CustomSearchView({
     Key? key,
     this.alignment,
     this.width,

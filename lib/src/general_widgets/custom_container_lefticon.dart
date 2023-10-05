@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/text_styles.dart';
-import 'package:personal_finance_advisor/src/general_widgets/custom_image_view.dart';
 import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
 class CustomContainerLeftIcon extends StatelessWidget {
@@ -46,7 +44,7 @@ class CustomContainerLeftIcon extends StatelessWidget {
             ),
           ),
         ),
-        Spacing.smallHeight(),
+        const Spacing.smallHeight(),
         Container(
           height: containerHeight ?? MediaQuery.of(context).size.height * 0.08,
           width: containerWidth ?? MediaQuery.of(context).size.width * 0.9,
@@ -56,20 +54,20 @@ class CustomContainerLeftIcon extends StatelessWidget {
             borderRadius: BorderRadius.circular(50),
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: Dimensions.medium),
+            padding: const EdgeInsets.symmetric(horizontal: Dimensions.medium),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Icon(icon,
                     color: AppColors
-                        .baseBlack), // TODO: Replace with custom image view (for svg
+                        .baseBlack), 
                 const Spacing.smallWidth(),
                 Expanded(
                   child: TextFormField(
                     controller: controller,
                     decoration: InputDecoration(
                       border: InputBorder
-                          .none, // remove the border when not focused
+                          .none, 
                       focusedBorder: InputBorder.none,
                       hintText: field,
                       hintStyle: AppTextStyles.textMdMedium.copyWith(
