@@ -6,6 +6,7 @@ import 'package:in_app_payment/buttons/pay_buttons.dart';
 import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/text_styles.dart';
+import 'package:personal_finance_advisor/src/features/auth/providers/user_provider.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_elevated_button.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_text_with_close.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_text_with_tick.dart';
@@ -16,7 +17,7 @@ class CustomPricingContainer extends ConsumerStatefulWidget {
   final List<String>? kcontent;
   final String buttontext;
   final VoidCallback? onTap;
-  final Color? containercolor;  
+  final Color? containercolor;
   final Color? buttonColor;
   final Color? buttontextcolor;
   final String? plan;
@@ -62,6 +63,8 @@ class _CustomPricingContainerState
 
   @override
   Widget build(BuildContext context) {
+    final userDetails = ref.watch(userProvider);
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 30,
@@ -193,9 +196,9 @@ class _CustomPricingContainerState
                         ),
                       )
                     : Platform.isIOS
-                        ? pay.applePay(context, amountToPay: "24", userID: '23')
+                        ? pay.applePay(context, amountToPay: "10", userID: '23')
                         : pay.googlePay(context,
-                            amountToPay: "24", userID: '23'),
+                            amountToPay: "10", userID: userDetails['id']!),
               ),
               const Spacing.mediumHeight(),
             ],
