@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:in_app_payment/buttons/pay_buttons.dart';
 import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
@@ -10,7 +11,7 @@ import 'package:personal_finance_advisor/src/general_widgets/custom_text_with_cl
 import 'package:personal_finance_advisor/src/general_widgets/custom_text_with_tick.dart';
 import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
-class CustomPricingContainer extends StatefulWidget {
+class CustomPricingContainer extends ConsumerStatefulWidget {
   final List<String>? xcontent;
   final List<String>? kcontent;
   final String buttontext;
@@ -51,10 +52,12 @@ class CustomPricingContainer extends StatefulWidget {
   });
 
   @override
-  State<CustomPricingContainer> createState() => _CustomPricingContainerState();
+  ConsumerState<CustomPricingContainer> createState() =>
+      _CustomPricingContainerState();
 }
 
-class _CustomPricingContainerState extends State<CustomPricingContainer> {
+class _CustomPricingContainerState
+    extends ConsumerState<CustomPricingContainer> {
   final pay = HNGPay();
 
   @override
@@ -165,34 +168,34 @@ class _CustomPricingContainerState extends State<CustomPricingContainer> {
                 ),
               ),
               const Spacer(),
-
-              
-
               Align(
                 alignment: AlignmentDirectional.bottomCenter,
-                child:  widget.optionalButton ?
-                CustomElevatedButton(
-                  width: 200,
-                  height: 48,
-                  text: widget.buttontext,
-                  buttonTextStyle: TextStyle(
-                    color: widget.buttontextcolor ?? AppColors.baseWhite,
-                    fontSize: widget.buttontextsize ?? Dimensions.medium,
-                    // fontWeight: FontWeight.w600,
-                  ),
-                  onTap: widget.onTap,
-                  buttonStyle: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(
-                        widget.buttonColor ?? AppColors.baseBlack),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                    ),
-                  ),
-                ) : Platform.isIOS ? pay.applePay(context, amountToPay: "24", userID: '23') :
-          pay.googlePay(context, amountToPay: "24", userID: '23'),
-           
+                child: widget.optionalButton
+                    ? CustomElevatedButton(
+                        width: 200,
+                        height: 48,
+                        text: widget.buttontext,
+                        buttonTextStyle: TextStyle(
+                          color: widget.buttontextcolor ?? AppColors.baseWhite,
+                          fontSize: widget.buttontextsize ?? Dimensions.medium,
+                          // fontWeight: FontWeight.w600,
+                        ),
+                        onTap: widget.onTap,
+                        buttonStyle: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              widget.buttonColor ?? AppColors.baseBlack),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                          ),
+                        ),
+                      )
+                    : Platform.isIOS
+                        ? pay.applePay(context, amountToPay: "24", userID: '23')
+                        : pay.googlePay(context,
+                            amountToPay: "24", userID: '23'),
               ),
               const Spacing.mediumHeight(),
             ],
