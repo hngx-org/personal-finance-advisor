@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
 import 'package:personal_finance_advisor/src/core/utils/app_enums.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
+import 'package:personal_finance_advisor/src/features/settings/screens/settings_screen.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_image_view.dart';
 import 'package:personal_finance_advisor/src/general_widgets/general_widgets_exports.dart';
 import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
@@ -25,7 +26,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await ref.read(chatProvider.notifier).chatHistory('Personal Finance Advisor');
+      await ref
+          .read(chatProvider.notifier)
+          .chatHistory('Personal Finance Advisor');
     });
   }
 
@@ -40,7 +43,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         titleSpacing: 24,
         elevation: Dimensions.tiny,
         automaticallyImplyLeading: false,
-        title:  Column(
+        title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
@@ -53,12 +56,35 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             Text(
               '• Online',
               style: TextStyle(
-                  color:  const Color(0XFF3ABF38).withOpacity(0.8),
+                  color: const Color(0XFF3ABF38).withOpacity(0.8),
                   fontSize: 12,
                   fontWeight: FontWeight.w500),
             ),
           ],
         ),
+        actions: [
+          PopupMenuButton(
+            color: Colors.blue.shade300,
+            surfaceTintColor: Colors.transparent,
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem<int>(
+                  value: 0,
+                  child: const Text(
+                    'Settings',
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const SettingsScreen(),
+                      ),
+                    );
+                  },
+                ),
+              ];
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -223,7 +249,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
 class DummyQuestionCont extends StatelessWidget {
   const DummyQuestionCont({
-    required this.text,
+    this.text = 'Prompt Appears Here',
     this.isResp = false,
     super.key,
   });
