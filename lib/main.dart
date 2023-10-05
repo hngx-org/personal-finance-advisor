@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      // home: const SplashScreen(),
-      home: PaymentOptions(),
+      home: const SplashScreen(),
+      // home: const PaymentOptions(),
     );
   }
 }
