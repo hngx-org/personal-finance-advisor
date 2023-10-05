@@ -86,11 +86,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   labelText: 'Username',
                   hintText: 'Enter your username',
                   validator: (value) {
-                    if (value == null ||
-                        value.isEmpty ||
-                        value.trim().length <= 1) {
-                      return 'Please enter a valid username';
+                    // Regular expression to match alphanumeric characters and optional underscore
+                    final RegExp usernameRegex = RegExp(r'^[a-zA-Z0-9_]+$');
+
+                    if (value == null || value.isEmpty || value.length < 2) {
+                      return 'Username must be at least 2 characters long';
                     }
+
+                    if (!usernameRegex.hasMatch(value)) {
+                      return 'Alphanumeric characters & underscores only';
+                    }
+
                     return null;
                   },
                 ),
@@ -103,14 +109,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   labelText: 'Email',
                   hintText: 'Enter your email',
                   validator: (value) {
+                    // Regular expression to match a valid email address
+                    final RegExp emailRegex = RegExp(
+                        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+
                     if (value == null ||
                         value.isEmpty ||
-                        value.trim().length <= 1 ||
-                        !value.contains('@') ||
-                        !value.contains('.') ||
-                        value.contains(' ') ||
-                        value.contains(',')) {
-                      return 'Please enter a valid email';
+                        !emailRegex.hasMatch(value)) {
+                      return 'Please enter a valid email address';
                     }
                     return null;
                   },
@@ -142,10 +148,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                   ),
                   validator: (value) {
-                    if (value == null ||
-                        value.isEmpty ||
-                        value.trim().length <= 1) {
-                      return 'Please enter a valid password';
+                    if (value == null || value.isEmpty || value.length < 8) {
+                      return 'Password must be at least 8 characters long';
                     }
                     return null;
                   },
@@ -158,6 +162,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       final email = _emailController.text;
                       final password = _passwordController.text;
                       final name = _usenameController.text;
+
                       final authRepository = Authentication();
 
                       // print(data);

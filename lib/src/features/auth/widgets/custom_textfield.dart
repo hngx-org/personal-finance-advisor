@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
 import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -67,10 +68,10 @@ class CustomTextField extends StatelessWidget {
         ),
         floatingLabelBehavior: FloatingLabelBehavior.never,
         hintText: hintText,
-        errorStyle: TextStyle(
+        errorStyle: const TextStyle(
           fontFamily: 'Roboto',
           fontSize: 14,
-          color: Theme.of(context).colorScheme.error,
+          color: AppColors.error500,
         ),
         filled: true,
         fillColor: Colors.white.withOpacity(0.7),
