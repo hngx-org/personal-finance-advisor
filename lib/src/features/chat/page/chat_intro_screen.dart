@@ -36,18 +36,20 @@ class ChatIntroScreen extends StatelessWidget {
             const Spacer(),
             CustomElevatedButton(
               //color: Colors.blue,
-              buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.blue.shade200)),
+              buttonStyle: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(Colors.blue.shade200)),
               height: 56,
               text: 'Continue',
               rightIcon: const Icon(Icons.arrow_right_alt_outlined,
-
                   color: Colors.white),
-              onTap: () => Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => const ChatScreen(),
-                  )),
-
+              onTap: () => Navigator.pushAndRemoveUntil(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => const ChatScreen(),
+                ),
+                (route) => false,
+              ),
             ),
             const Spacing.largeHeight(),
           ],

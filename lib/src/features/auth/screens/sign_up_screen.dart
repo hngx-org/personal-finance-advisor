@@ -1,27 +1,27 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hng_authentication/authentication.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:personal_finance_advisor/src/core/helper_fxn.dart';
-
 import '../../../core/utils/theme/colors.dart';
 import '../../../general_widgets/spacing.dart';
 import '../../payments/screens/payment_options.dart';
+import '../providers/user_provider.dart';
 import '../widgets/custom_botton.dart';
 import '../widgets/custom_textfield.dart';
 import '../widgets/dotted_line_w_text.dart';
 import 'log_in_screen.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
 
   static String cookies = '';
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  ConsumerState<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -30,6 +30,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _isSending = false;
 
   Future<void> _signUpUser() async {
+    FocusManager.instance.primaryFocus?.unfocus(); // dismiss keyboard
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isSending = true;
@@ -44,6 +45,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
       try {
         final userData = await authRepository.signUp(email, name, password);
+        ref.read(userProvider.notifier).setUser({
+          'id': userData?.id ?? "",
+          'name': userData?.name ?? "",
+          'email': userData?.email ?? "",
+        });
+
         debugPrint('User cookie : ${userData?.cookie}');
         debugPrint('User cookie : ${userData?.email}');
         debugPrint('User cookie : ${userData?.name}');
@@ -76,6 +83,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userDetails = ref.watch(userProvider);
+
+    debugPrint(userDetails.toString()); // Testing
+
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
