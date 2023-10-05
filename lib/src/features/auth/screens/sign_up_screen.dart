@@ -170,10 +170,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       try {
                         await authRepository.signUp(email, name, password);
                         if (!mounted) return;
-                        Navigator.of(context).push(
+                        Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                             builder: (context) => const PaymentOptions(),
                           ),
+                          (route) => false,
                         );
                       } catch (ex) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -181,6 +182,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             content: Text(
                               ex.toString(),
                             ),
+                            duration: const Duration(seconds: 3),
                           ),
                         );
                       }
@@ -220,10 +222,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const Spacing.largeHeight(),
                 CustomButton(
-                  onPressed: () => Navigator.of(context).push(
+                  onPressed: () => Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
                       builder: (context) => const LoginScreen(),
                     ),
+                    (route) => false,
                   ),
                   buttonText: 'Log In',
                   backgroundColor: Colors.white.withOpacity(0.28),

@@ -48,11 +48,13 @@ class PaymentOptions extends StatelessWidget {
                     pricetext: "Per member, per month",
                     buttontext: "Start 14 day free trial",
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => const ChatIntroScreen(),
-                          ));
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => const ChatIntroScreen(),
+                        ),
+                        (route) => false,
+                      );
                     },
                   ),
                   // const Spacing.smallWidth(),

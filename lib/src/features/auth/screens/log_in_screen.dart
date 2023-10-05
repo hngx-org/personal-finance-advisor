@@ -152,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           MaterialPageRoute(
                             builder: (context) => const ChatScreen(),
                           ),
-                          ModalRoute.withName('/'),
+                          (route) => false,
                         );
                       } catch (ex) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -160,6 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             content: Text(
                               ex.toString(),
                             ),
+                            duration: const Duration(seconds: 3),
                           ),
                         );
                       }
@@ -208,7 +209,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     MaterialPageRoute(
                       builder: (context) => const SignUpScreen(),
                     ),
-                    ModalRoute.withName('/'),
+                    (route) => false,
                   ),
                   buttonText: 'Create An Account',
                   backgroundColor: Colors.white.withOpacity(0.28),
