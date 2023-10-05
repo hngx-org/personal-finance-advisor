@@ -40,7 +40,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         titleSpacing: 24,
         elevation: Dimensions.tiny,
         automaticallyImplyLeading: false,
-        title: Column(
+        title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(

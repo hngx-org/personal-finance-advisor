@@ -34,7 +34,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.3.6
-  flutter_svg: ^1.1.6
+  flutter_svg: ^2.0.7
   fluttertoast: ^8.2.2
   hooks_riverpod: ^2.3.6
   intl: ^0.18.0
@@ -43,6 +43,8 @@ dependencies:
     git:
       url: https://github.com/hngx-org/openai-package.git
       ref: main
+  in_app_payment: ^0.0.1
+
 
 dev_dependencies:
 

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:personal_finance_advisor/src/features/Splash/splash_screen.dart';
+import 'package:personal_finance_advisor/src/features/payments/screens/payment_options.dart';
+
 
 void main() {
   runApp(const ProviderScope(child:  MyApp()));
