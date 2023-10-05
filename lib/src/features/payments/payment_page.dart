@@ -29,7 +29,7 @@ class PaymentPage extends StatelessWidget {
                     color: AppColors.baseWhite,
                   ),
                 ),
-                Column(
+                const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomContainerLeftIcon(
@@ -94,7 +94,7 @@ class PaymentPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Spacing.mediumHeight(),
+                        const Spacing.mediumHeight(),
                         ConstrainedBox(
                           constraints: const BoxConstraints(
                               maxWidth: 100,
@@ -117,7 +117,6 @@ class PaymentPage extends StatelessWidget {
                               minHeight: Dimensions.large),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(50.0),
-                          
                             child: const Image(
                               image: AssetImage("images/google-pay.png"),
                             ),
@@ -135,11 +134,13 @@ class PaymentPage extends StatelessWidget {
                   width: MediaQuery.sizeOf(context).width * 0.4,
                   height: MediaQuery.sizeOf(context).height * 0.05,
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => const ChatIntroScreen(),
-                        ));
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      CupertinoPageRoute(
+                        builder: (context) => const ChatIntroScreen(),
+                      ),
+                      (route) => false,
+                    );
                   },
                   buttonStyle: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
