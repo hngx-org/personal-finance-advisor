@@ -70,7 +70,7 @@ class _CustomPricingContainerState extends State<CustomPricingContainer> {
             width: MediaQuery.sizeOf(context).width * 0.46,
             decoration: BoxDecoration(
               color: widget.containercolor ?? Colors.white,
-              border: Border.all(color: Colors.deepPurple, width: 2),
+              border: Border.all(color: Colors.blueAccent, width: 2),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Column(
@@ -102,7 +102,7 @@ class _CustomPricingContainerState extends State<CustomPricingContainer> {
                         child: Text(widget.plantext ?? " Nothing",
                             style: TextStyle(
                               color: AppColors.baseBlack,
-                              fontSize: Dimensions.smedium,
+                              fontSize: Dimensions.medium,
                               fontWeight: FontWeight.bold,
                             )),
                       ),

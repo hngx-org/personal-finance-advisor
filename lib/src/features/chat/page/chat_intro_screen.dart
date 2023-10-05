@@ -17,7 +17,7 @@ class ChatIntroScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Spacing.largeHeight(),
+            Spacer(),
             const Text(
               'Your Ai Assistance',
               style: TextStyle(fontWeight: FontWeight.w700, fontSize: 23),
@@ -36,17 +36,19 @@ class ChatIntroScreen extends StatelessWidget {
             ),
             const Spacer(),
             CustomElevatedButton(
+              //color: Colors.blue,
+              buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.blue.shade200)),
               height: 56,
               text: 'Continue',
               rightIcon: const Icon(Icons.arrow_right_alt_outlined,
-                  color: AppColors.primaryMainColor),
-              onTap: () => Navigator.pushAndRemoveUntil(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) => const ChatScreen(),
-                ),
-                (route) => false,
-              ),
+
+                  color: Colors.white),
+              onTap: () => Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => const ChatScreen(),
+                  )),
+
             ),
             const Spacing.largeHeight(),
           ],

@@ -112,7 +112,7 @@ class PaymentPage extends StatelessWidget {
                         ConstrainedBox(
                           constraints: const BoxConstraints(
                               maxWidth: 100,
-                              maxHeight: 250,
+                              maxHeight: 100,
                               minWidth: Dimensions.large,
                               minHeight: Dimensions.large),
                           child: ClipRRect(
