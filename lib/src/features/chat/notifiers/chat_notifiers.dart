@@ -19,13 +19,15 @@ class ChatNotifier extends StateNotifier<ChatState> {
   Future<void> sendChat(
     String userInput,
   ) async {
+    log('cookies used $cookie');
     state = state.copyWith(loadState: LoadState.loading);
 
     try {
       final response = await openAI.getChat(userInput, cookie);
-      log('Data Resp for char: ${response}');
+      log('Data Resp for CHAT: $response');
       state = state.copyWith(errorMessage: response, loadState: LoadState.done);
-      if (response.toString() == 'Error: Subscription Required') {
+      if (response.toString() == 'Error: Subscription Required' ||
+          response.toString().startsWith('Error')) {
         errorToastMessage(response);
       }
     } catch (e) {
@@ -41,15 +43,18 @@ class ChatNotifier extends StateNotifier<ChatState> {
   Future<void> chatHistory(
     String userInput,
   ) async {
+    log('cookies used $cookie');
     state = state.copyWith(loadState: LoadState.loading);
     try {
       final response = await openAI.getChatCompletions(
           state.history ?? [], userInput, cookie);
 
-      log('Data Resp for history: ${response}');
+      log('Data Resp for HISTORY: $response');
       state = state.copyWith(errorMessage: response, loadState: LoadState.done);
-
-      toastMessage('$response');
+      if (response.toString() == 'Error: Subscription Required' ||
+          response.toString().startsWith('Error')) {
+        errorToastMessage(response);
+      }
     } catch (e) {
       state = state.copyWith(
         loadState: LoadState.error,

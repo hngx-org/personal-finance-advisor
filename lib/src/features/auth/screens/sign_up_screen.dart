@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hng_authentication/authentication.dart';
@@ -42,11 +44,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
       final authRepository = Authentication();
 
       try {
-              final userData =
-                            await authRepository.signUp(email, name, password);
-                        SignUpScreen.cookies = userData?.cookie ?? "";
+        final userData = await authRepository.signUp(email, name, password);
+        debugPrint('User cookie : ${userData?.cookie}');
+        debugPrint('User cookie : ${userData?.email}');
+        debugPrint('User cookie : ${userData?.name}');
+        debugPrint('User cookie : ${userData?.credits}');
+        SignUpScreen.cookies = userData?.cookie ?? "";
 
-                        toastMessage('Welcome ${userData?.name ?? ""}');
+        toastMessage('Welcome ${userData?.name ?? ""}');
         if (!mounted) return;
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
@@ -54,7 +59,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
           (route) => false,
         );
-      }on ApiException catch (ex) {
+      } on ApiException catch (ex) {
         setState(() {
           _isSending = false;
         });

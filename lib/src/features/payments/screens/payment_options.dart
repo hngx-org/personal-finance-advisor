@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:in_app_payment/buttons/pay_buttons.dart';
+// import 'package:in_app_payment/buttons/pay_buttons.dart';
 import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
 import 'package:personal_finance_advisor/src/features/chat/page/chat_intro_screen.dart';
-import 'package:personal_finance_advisor/src/features/payments/payment_page.dart';
 import 'package:personal_finance_advisor/src/features/payments/screens/payWith.dart';
-import 'package:personal_finance_advisor/src/general_widgets/custom_elevated_button.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_pricing_container.dart';
 import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 

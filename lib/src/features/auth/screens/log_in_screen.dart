@@ -40,11 +40,10 @@ class _LoginScreenState extends State<LoginScreen> {
       final authRepository = Authentication();
 
       try {
-                final data =
-                            await authRepository.signIn(email, password);
-                        log('Data retrieved => ${data.toString}');
-                        toastMessage('Welcome Back ${data?.name ?? ""}');
-                        LoginScreen.cookies = data.cookie;
+        final data = await authRepository.signIn(email, password);
+        log('Data retrieved => ${data.toString}');
+        toastMessage('Welcome Back ${data?.name ?? ""}');
+        LoginScreen.cookies = data.cookie;
         if (!mounted) return;
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
@@ -52,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           (route) => false,
         );
-      }on ApiException catch (ex) {
+      } on ApiException catch (ex) {
         setState(() {
           _isSending = false;
         });

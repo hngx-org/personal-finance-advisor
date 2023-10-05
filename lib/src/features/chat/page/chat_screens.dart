@@ -40,7 +40,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         titleSpacing: 24,
         elevation: Dimensions.tiny,
         automaticallyImplyLeading: false,
-        title: const Column(
+        title:  Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
@@ -53,7 +53,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             Text(
               '• Online',
               style: TextStyle(
-                  color: const Color(0XFF3ABF38).withOpacity(0.8),
+                  color:  Color(0XFF3ABF38).withOpacity(0.8),
                   fontSize: 12,
                   fontWeight: FontWeight.w500),
             ),
