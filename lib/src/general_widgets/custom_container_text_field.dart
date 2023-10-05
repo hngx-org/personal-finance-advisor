@@ -2,7 +2,6 @@ import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:personal_finance_advisor/src/general_widgets/custom_image_view.dart';
 
 class CustomContainerTextField extends StatelessWidget {
   final double? boxheight;

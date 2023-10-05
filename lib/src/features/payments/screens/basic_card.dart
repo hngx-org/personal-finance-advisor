@@ -13,11 +13,8 @@ class BasicCard extends StatelessWidget {
       plan: "BASIC",
       plantext:
           """For all individuals who want an experience of Finance Advisor""",
-      kcontent: const ["Limited Prompts Per Day"],
-      xcontent: const [
-        "Financial Summary",
-        "Personalised answers",
-      ],
+      kcontent: const ["Smart Saving Suggestions", "Financial Insights"],
+      xcontent: const ["Limited Prompts Per day"],
       iconxbgcolor: AppColors.baseBlack,
       iconxcolor: AppColors.baseWhite,
       planprice: r"$0",
@@ -36,4 +33,3 @@ class BasicCard extends StatelessWidget {
     );
   }
 }
-

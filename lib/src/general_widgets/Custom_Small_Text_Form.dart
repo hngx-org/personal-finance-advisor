@@ -26,7 +26,7 @@ class CustomSmallTextField extends StatelessWidget {
           ),
         ),
         TextFormField(
-          style: TextStyle(fontSize: 20.0, height: 2.0),
+          style: const TextStyle(fontSize: 20.0, height: 2.0),
           maxLength: maxLength,
           maxLines: maxLines,
           decoration: InputDecoration(

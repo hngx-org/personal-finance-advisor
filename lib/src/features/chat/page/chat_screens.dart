@@ -40,51 +40,52 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     final notifer = ref.watch(chatProvider.notifier);
     return Scaffold(
       appBar: AppBar(
-          titleSpacing: 24,
-          elevation: Dimensions.tiny,
-          automaticallyImplyLeading: false,
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Personal Finance Advisor',
-                style: TextStyle(
-                    color: AppColors.primaryMainColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700),
-              ),
-              Text(
-                '• Online',
-                style: TextStyle(
-                    color: const Color(0XFF3ABF38).withOpacity(0.8),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500),
-              ),
-            ],
-          ),
-          actions: [
-            PopupMenuButton(
-              color: Colors.blue.shade300,
-              surfaceTintColor: Colors.transparent,
-              itemBuilder: (context) {
-                return [
-                  PopupMenuItem<int>(
-                    value: 0,
-                    child: const Text(
-                      'Settings',
-                    ),
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const SettingsScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                ];
-              },
+        titleSpacing: 24,
+        elevation: Dimensions.tiny,
+        automaticallyImplyLeading: false,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Personal Finance Advisor',
+              style: TextStyle(
+                  color: AppColors.primaryMainColor,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700),
             ),
-          ]),
+            Text(
+              '• Online',
+              style: TextStyle(
+                  color: const Color(0XFF3ABF38).withOpacity(0.8),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500),
+            ),
+          ],
+        ),
+        actions: [
+          PopupMenuButton(
+            color: Colors.blue.shade300,
+            surfaceTintColor: Colors.transparent,
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem<int>(
+                  value: 0,
+                  child: const Text(
+                    'Settings',
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const SettingsScreen(),
+                      ),
+                    );
+                  },
+                ),
+              ];
+            },
+          ),
+        ],
+      ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(

@@ -148,49 +148,51 @@ class _AppTextFieldState extends State<AppTextField> {
               hintStyle: AppTextStyles.textXsRegular.copyWith(
                   fontWeight: FontWeight.w400,
                   fontSize: 14,
-                  color: AppColors.gray800),
+
+                  color: AppColors.gray600),
               errorStyle: TextStyle(color: AppColors.gray900),
+
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: AppColors.gray900,
                   width: 1,
                 ),
               ),
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: AppColors.gray900,
                   width: 1,
                 ),
               ),
               disabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: AppColors.gray100,
                   width: 0.5,
                 ),
               ),
-              labelStyle: TextStyle(
+              labelStyle: const TextStyle(
                 color: AppColors.gray400,
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: AppColors.gray100,
                   width: 1,
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: AppColors.gray100,
                   width: 0.5,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.borderRadius),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: AppColors.gray100,
                   width: 1,
                 ),

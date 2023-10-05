@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
-import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
 class CustomCloseText extends StatelessWidget {
   final String? contentx;
@@ -26,10 +25,10 @@ class CustomCloseText extends StatelessWidget {
             ), // change this to your desired icon and color
           ),
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Text(
           contentx!,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
             fontSize: Dimensions.medium,
           ),
