@@ -41,12 +41,14 @@ class ChatIntroScreen extends StatelessWidget {
               height: 56,
               text: 'Continue',
               rightIcon: const Icon(Icons.arrow_right_alt_outlined,
+
                   color: Colors.white),
               onTap: () => Navigator.push(
                   context,
                   CupertinoPageRoute(
                     builder: (context) => const ChatScreen(),
                   )),
+
             ),
             const Spacing.largeHeight(),
           ],

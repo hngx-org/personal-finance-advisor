@@ -85,7 +85,7 @@ class _CustomPricingContainerState extends State<CustomPricingContainer> {
                         padding: EdgeInsets.all(8.0),
                         decoration: BoxDecoration(
                           color: Color(0xFFF1F1F1),
-                          borderRadius: BorderRadius.circular(10.0),
+                          borderRadius: BorderRadius.circular(50.0),
                         ),
                         child: Center(
                           child: Text(
@@ -194,7 +194,7 @@ class _CustomPricingContainerState extends State<CustomPricingContainer> {
                           widget.buttonColor ?? AppColors.baseBlack),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
+                          borderRadius: BorderRadius.circular(50),
                         ),
                       ),
                     ),

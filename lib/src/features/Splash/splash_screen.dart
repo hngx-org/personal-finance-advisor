@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
 
 import 'package:personal_finance_advisor/src/features/Splash/screen_ui.dart';
@@ -11,6 +12,12 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.light,
+      ),
+    );
     return AnimatedSplashScreen(
       backgroundColor: AppColors.primaryMainColor,
       splash: const ScreenUI(),

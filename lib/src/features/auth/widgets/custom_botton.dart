@@ -3,18 +3,16 @@ import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
 class CustomButton extends StatelessWidget {
   final void Function()? onPressed;
-  final String buttonText;
+  final Widget buttonContent;
   final Color backgroundColor;
   final Color shadowColor;
-  final Widget? textIcon;
 
   const CustomButton({
     super.key,
     this.onPressed,
-    required this.buttonText,
+    required this.buttonContent,
     required this.backgroundColor,
     required this.shadowColor,
-    this.textIcon,
   });
 
   @override
@@ -44,17 +42,7 @@ class CustomButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              buttonText,
-              style: const TextStyle(
-                fontFamily: 'Roboto',
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
-            ),
-            if (textIcon != null) const Spacing.tinyWidth(),
-            if (textIcon != null) textIcon!,
+            buttonContent,
           ],
         ),
       ),

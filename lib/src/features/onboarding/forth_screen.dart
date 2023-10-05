@@ -10,7 +10,7 @@ class ForthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 202, 220, 253),
+      backgroundColor: const Color.fromARGB(255, 202, 220, 253),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -64,7 +64,7 @@ class ForthScreen extends StatelessWidget {
                         MaterialPageRoute(
                           builder: (context) => const SignUpScreen(),
                         ),
-                        ModalRoute.withName('/'),
+                        (route) => false,
                       );
                     },
                     child: const Text(
