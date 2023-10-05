@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/text_styles.dart';
+import 'package:personal_finance_advisor/src/features/auth/screens/sign_up_screen.dart';
 import 'package:personal_finance_advisor/src/features/payments/screens/basic_card.dart';
 import 'package:personal_finance_advisor/src/features/payments/screens/premium_card.dart';
 
@@ -17,15 +18,18 @@ class _PaymentOptionsState extends State<PaymentOptions> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true,
-        //add leading automatically icon
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios,
             color: Colors.black,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => const SignUpScreen(),
+              ),
+              (route) => false,
+            );
           },
         ),
         backgroundColor: Colors.transparent,
