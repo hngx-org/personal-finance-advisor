@@ -20,8 +20,8 @@ class PremiumCard extends StatelessWidget {
       iconkcolor: AppColors.baseBlack,
       kcontent: const [
         "Unlimited Prompts",
-        "Personalised answers",
-        "Financial Summary",
+        "Smart Saving Suggestions",
+        "Financial Insights",
       ],
       buttonColor: AppColors.baseWhite,
       buttontext: "Get Premium",

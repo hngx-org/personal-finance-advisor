@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
 class CustomButton extends StatelessWidget {
   final void Function()? onPressed;

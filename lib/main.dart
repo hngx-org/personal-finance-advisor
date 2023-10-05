@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:personal_finance_advisor/src/features/Splash/splash_screen.dart';
 import 'package:personal_finance_advisor/src/features/payments/screens/payment_options.dart';
 
 
@@ -21,8 +20,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const SplashScreen(),
-      // home: const PaymentOptions(),
+      // home: const SplashScreen(),
+      home: const PaymentOptions(),
     );
   }
 }

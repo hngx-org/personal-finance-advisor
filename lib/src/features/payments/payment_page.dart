@@ -4,7 +4,7 @@ import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/text_styles.dart';
 import 'package:personal_finance_advisor/src/features/chat/page/chat_intro_screen.dart';
-import 'package:personal_finance_advisor/src/general_widgets/Custom_Small_Text_Form.dart';
+import 'package:personal_finance_advisor/src/general_widgets/custom_small_text_form.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_container_lefticon.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_elevated_button.dart';
 import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
@@ -29,7 +29,7 @@ class PaymentPage extends StatelessWidget {
                     color: AppColors.baseWhite,
                   ),
                 ),
-                Column(
+                const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomContainerLeftIcon(
@@ -94,7 +94,7 @@ class PaymentPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Spacing.mediumHeight(),
+                        const Spacing.mediumHeight(),
                         ConstrainedBox(
                           constraints: const BoxConstraints(
                               maxWidth: 100,

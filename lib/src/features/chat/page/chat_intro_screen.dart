@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
 import 'package:personal_finance_advisor/src/features/chat/page/chat_screens.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_elevated_button.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_image_view.dart';
@@ -17,7 +16,7 @@ class ChatIntroScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Spacer(),
+            const Spacer(),
             const Text(
               'Your Ai Assistance',
               style: TextStyle(fontWeight: FontWeight.w700, fontSize: 23),
