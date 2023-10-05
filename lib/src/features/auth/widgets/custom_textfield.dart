@@ -8,8 +8,9 @@ class CustomTextField extends StatelessWidget {
   final String labelText;
   final String hintText;
   final String? Function(String?)? validator;
-  final void Function(String?)? onSaved;
+  final Function(String)? onFieldSubmitted;
   final TextInputType? keyboardType;
+  final TextInputAction? textInputAction;
   final bool hideText;
   final Widget? visibilityIcon;
 
@@ -20,10 +21,11 @@ class CustomTextField extends StatelessWidget {
     required this.labelText,
     required this.hintText,
     this.validator,
-    this.onSaved,
     this.keyboardType,
     required this.hideText,
     this.visibilityIcon,
+    this.textInputAction,
+    this.onFieldSubmitted,
   });
 
   @override
@@ -32,8 +34,9 @@ class CustomTextField extends StatelessWidget {
       obscureText: hideText,
       controller: controller,
       validator: validator,
-      onSaved: onSaved,
+      onFieldSubmitted: onFieldSubmitted,
       keyboardType: keyboardType,
+      textInputAction: textInputAction,
       cursorColor: Colors.black,
       style: const TextStyle(
         fontFamily: 'Roboto',
