@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:personal_finance_advisor/src/features/auth/screens/sign_up_screen.dart';
-import 'package:personal_finance_advisor/src/features/onboarding/third_screen.dart';
 
 class ForthScreen extends StatelessWidget {
   const ForthScreen({super.key});

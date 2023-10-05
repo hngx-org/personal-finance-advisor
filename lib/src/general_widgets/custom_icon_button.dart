@@ -2,7 +2,7 @@ import 'package:personal_finance_advisor/src/core/utils/theme/theme_helper.dart'
 import 'package:flutter/material.dart';
 
 class CustomIconButton extends StatelessWidget {
-  CustomIconButton({
+  const CustomIconButton({
     Key? key,
     this.alignment,
     this.margin,
@@ -60,7 +60,7 @@ class CustomIconButton extends StatelessWidget {
                         color: appTheme.teal900.withOpacity(0.31),
                         spreadRadius: 2,
                         blurRadius: 2,
-                        offset: Offset(
+                        offset: const Offset(
                           0,
                           4,
                         ),

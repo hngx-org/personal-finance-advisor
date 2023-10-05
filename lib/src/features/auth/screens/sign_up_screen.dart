@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:hng_authentication/authentication.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:personal_finance_advisor/src/core/helper_fxn.dart';
-
 import '../../../core/utils/theme/colors.dart';
 import '../../../general_widgets/spacing.dart';
 import '../../payments/screens/payment_options.dart';
