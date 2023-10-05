@@ -64,11 +64,11 @@ class _LoginScreenState extends State<LoginScreen> {
             duration: const Duration(seconds: 3),
           ),
         );
-      } catch (otherExeptions) {
+      } catch (otherExceptions) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              otherExeptions.toString(),
+              otherExceptions.toString(),
             ),
           ),
         );

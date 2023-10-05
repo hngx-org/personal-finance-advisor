@@ -78,11 +78,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
             duration: const Duration(seconds: 3),
           ),
         );
-      } catch (otherExeptions) {
+      } catch (otherExceptions) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              otherExeptions.toString(),
+              otherExceptions.toString(),
             ),
           ),
         );
