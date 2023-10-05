@@ -24,10 +24,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async{
-     await ref.read(chatProvider.notifier).chatHistory(_chatCont.text);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await ref.read(chatProvider.notifier).chatHistory('Personal Finance Advisor');
     });
   }
+
+  String question = '';
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             Text(
               '• Online',
               style: TextStyle(
-                  color: Color(0XFF3ABF38).withOpacity(0.8),
+                  color: const Color(0XFF3ABF38).withOpacity(0.8),
                   fontSize: 12,
                   fontWeight: FontWeight.w500),
             ),
@@ -61,13 +63,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
-          children: _chatCont.text.isNotEmpty
+          children: _chatCont.text.isNotEmpty || state.errorMessage != ''
               ? [
                   const Spacing.mediumHeight(),
-                  Text('Chat History'),
-                  const Spacing.smallHeight(),
                   (state.history ?? []).isEmpty
-                      ? Text('No History')
+                      ? const Text('')
                       : ListView.builder(
                           shrinkWrap: true,
                           itemCount: (state.history ?? []).length,
@@ -78,18 +78,16 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                             );
                           }),
                   DummyQuestionCont(
-                    text: _chatCont.text,
+                    text: question,
                   ),
-                  DummyQuestionCont(
-                    text: state.errorMessage,
-                  ),
+                  DummyQuestionCont(text: state.errorMessage, isResp: true),
                   state.loadState == LoadState.loading
-                      ? Center(
+                      ? const Center(
                           child: CupertinoActivityIndicator(
                             color: AppColors.primaryMainColor,
                           ),
                         )
-                      : SizedBox(),
+                      : const SizedBox(),
                   const Spacing.smallHeight(),
                 ]
               : [
@@ -154,43 +152,59 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                           'Discuss the pros and cons of investing in real estate'),
                   const Spacing.smallHeight(),
                   state.loadState == LoadState.loading
-                      ? Center(
+                      ? const Center(
                           child: CupertinoActivityIndicator(
                             color: AppColors.primaryMainColor,
                           ),
                         )
-                      : SizedBox(),
+                      : const SizedBox(),
                   const Spacing.smallHeight(),
+                  (state.history ?? []).isEmpty
+                      ? const Text('No History')
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: (state.history ?? []).length,
+                          itemBuilder: (context, index) {
+                            final text = (state.history ?? [])[index];
+                            return DummyQuestionCont(text: text, isResp: true);
+                          }),
                 ],
         ),
       ),
       bottomNavigationBar: Container(
         height: 100,
         width: double.infinity,
-        color: const Color(0XFF3F3F3F).withOpacity(0.3),
+        color: const Color(0XFF3F3F3F).withOpacity(0.09),
         alignment: Alignment.center,
         padding: const EdgeInsets.all(Dimensions.medium),
         margin: MediaQuery.of(context).viewInsets,
         child: AppTextField(
           controller: _chatCont,
+          backgroundColor: Colors.blue.shade50,
           hintText: 'Let me give you financial advice',
+          onFieldSubmitted: (p0) {
+            setState(() {
+              question = p0;
+            });
+            debugPrint('In Chat submitted');
+            notifer.sendChat(p0);
+
+            _chatCont.clear();
+          },
           borderRadius: 30,
           suffixIcon: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                CustomImageView(
-                  height: 24,
-                  width: 24,
-                  svgPath: 'assets/images/microphone.svg',
-                ),
                 const Spacing.smallWidth(),
                 CustomImageView(
                   height: 24,
                   width: 24,
                   onTap: () {
-                    setState(() {});
+                    setState(() {
+                      question = _chatCont.text;
+                    });
                     debugPrint('In Chat field');
                     notifer.sendChat(_chatCont.text);
 
@@ -210,25 +224,31 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 class DummyQuestionCont extends StatelessWidget {
   const DummyQuestionCont({
     required this.text,
+    this.isResp = false,
     super.key,
   });
   final String text;
+  final bool? isResp;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
+      // height: 40,
       width: double.infinity,
-      padding: const EdgeInsets.all(4),
+      padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.symmetric(
           horizontal: Dimensions.medium, vertical: Dimensions.small),
       decoration: BoxDecoration(
-          color: const Color(0XFF3F3F3F).withOpacity(0.1),
+          color: isResp ?? false
+              ? Colors.blue.shade50
+              // AppColors.primaryMainColor.withOpacity(0.3)
+              : const Color(0XFF3F3F3F).withOpacity(0.1),
           borderRadius: BorderRadius.circular(30)),
       child: Center(
           child: Text(
         text,
-        overflow: TextOverflow.ellipsis,
+        overflow: TextOverflow.clip,
+        textAlign: TextAlign.left,
         style: const TextStyle(
           color: Color(0XFF3F3F3F),
         ),

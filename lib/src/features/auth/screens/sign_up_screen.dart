@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hng_authentication/authentication.dart';
+import 'package:personal_finance_advisor/src/core/helper_fxn.dart';
 
 import '../../../core/utils/theme/colors.dart';
 import '../../../general_widgets/spacing.dart';
@@ -11,6 +12,8 @@ import 'log_in_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
+
+  static String cookies = '';
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
@@ -163,18 +166,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       // print(data);
 
                       try {
-                        await authRepository.signUp(email, name, password);
+                        final userData =
+                            await authRepository.signUp(email, name, password);
+                        SignUpScreen.cookies = userData?.cookie ?? "";
+
+                        toastMessage('Welcome ${userData?.name ?? ""}');
                         if (!mounted) return;
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => const PaymentOptions(),
                           ),
                         );
-                      } catch (ex) {
+                      } on ApiException catch (ex) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              ex.toString(),
+                              ex.message,
                             ),
                           ),
                         );

@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hng_authentication/authentication.dart';
-
+import 'package:personal_finance_advisor/src/core/helper_fxn.dart';
 import 'package:personal_finance_advisor/src/features/chat/page/chat_screens.dart';
 
 import '../../../core/utils/theme/colors.dart';
@@ -12,6 +14,7 @@ import 'sign_up_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+  static String cookies = '';
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -146,7 +149,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       final authRepository = Authentication();
 
                       try {
-                        await authRepository.signIn(email, password);
+                        final data =
+                            await authRepository.signIn(email, password);
+                        log('Data retrieved => ${data.toString}');
+                        toastMessage('Welcome Back ${data?.name ?? ""}');
+                        LoginScreen.cookies = data.cookie;
                         if (!mounted) return;
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
@@ -154,11 +161,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           ModalRoute.withName('/'),
                         );
-                      } catch (ex) {
+                      } on ApiException catch (ex) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              ex.toString(),
+                              ex.message,
                             ),
                           ),
                         );
