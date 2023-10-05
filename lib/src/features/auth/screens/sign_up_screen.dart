@@ -79,6 +79,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
           ),
         );
       } catch (otherExceptions) {
+        setState(() {
+          _isSending = false;
+        });
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
@@ -231,7 +234,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   ),
                   const Spacing.largeHeight(),
                   CustomButton(
-                    onPressed: _signUpUser,
+                    onPressed: _isSending ? null : _signUpUser,
                     buttonContent: _isSending
                         ? const SizedBox(
                             height: 24,
