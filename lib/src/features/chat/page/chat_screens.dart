@@ -53,7 +53,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             Text(
               '• Online',
               style: TextStyle(
-                  color:  Color(0XFF3ABF38).withOpacity(0.8),
+                  color:  const Color(0XFF3ABF38).withOpacity(0.8),
                   fontSize: 12,
                   fontWeight: FontWeight.w500),
             ),

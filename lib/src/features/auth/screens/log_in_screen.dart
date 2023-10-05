@@ -28,6 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isSending = false;
 
   Future<void> _logInUser() async {
+    FocusManager.instance.primaryFocus?.unfocus(); // dismiss keyboard
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isSending = true;
@@ -61,6 +62,14 @@ class _LoginScreenState extends State<LoginScreen> {
               ex.message,
             ),
             duration: const Duration(seconds: 3),
+          ),
+        );
+      } catch (otherExceptions) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              otherExceptions.toString(),
+            ),
           ),
         );
       }

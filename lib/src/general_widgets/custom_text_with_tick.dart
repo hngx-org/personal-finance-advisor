@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
-import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
 class CustomTickText extends StatelessWidget {
   final String? content;
@@ -29,10 +28,10 @@ class CustomTickText extends StatelessWidget {
             ), // change this to your desired icon and color
           ),
         ),
-        SizedBox(width: 10),
+        const SizedBox(width: 10),
         Text(
             content!,
-            style: TextStyle(
+            style: const TextStyle(
               // overflow: TextOverflow.ellipsis,
               color: Colors.black,
               fontSize: Dimensions.medium,
