@@ -43,7 +43,7 @@ dependencies:
     git:
       url: https://github.com/hngx-org/openai-package.git
       ref: main
-  in_app_payment: ^0.0.1
+  in_app_payment: ^0.0.2
 
 
 dev_dependencies:

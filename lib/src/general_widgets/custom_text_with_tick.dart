@@ -29,19 +29,14 @@ class CustomTickText extends StatelessWidget {
             ), // change this to your desired icon and color
           ),
         ),
-        Spacing.tinyWidth(),
-        SizedBox(
-          width: 130,
-          child: RichText(
-            text: TextSpan(
-              text: content,
-              style: TextStyle(
-                overflow: TextOverflow.ellipsis,
-                color: Colors.black,
-                fontSize: Dimensions.medium,
-              ),
+        SizedBox(width: 10),
+        Text(
+            content!,
+            style: TextStyle(
+              // overflow: TextOverflow.ellipsis,
+              color: Colors.black,
+              fontSize: Dimensions.medium,
             ),
-          ),
         ),
       ],
     );
