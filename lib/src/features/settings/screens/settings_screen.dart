@@ -29,6 +29,7 @@ class SettingsScreen extends ConsumerWidget {
               builder: (context) => const LoginScreen(),
             ),
             (route) => false);
+        ref.read(isLoadingProvider.notifier).state = false;
       } on ApiException catch (ex) {
         ref.read(isLoadingProvider.notifier).state = false;
         ScaffoldMessenger.of(context).showSnackBar(
