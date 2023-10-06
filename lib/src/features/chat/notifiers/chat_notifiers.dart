@@ -18,7 +18,7 @@ class ChatNotifier extends StateNotifier<ChatState> {
 
   Future<void> sendChat(String userInput, context) async {
     log('cookies used $cookie');
-    state = state.copyWith(chatState: LoadState.loading);
+    state = state.copyWith(chatState: LoadState.loading, errorMessage: 'loading');
 
     try {
       final response = await openAI.getChat(userInput, cookie);

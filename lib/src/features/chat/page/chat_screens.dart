@@ -99,23 +99,15 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                   DummyQuestionCont(
                     text: question,
                   ),
-                  state.chatState == LoadState.loading
+                  state.errorMessage == 'loading'
                       ? const Center(
                           child: CupertinoActivityIndicator(
                             color: AppColors.primaryMainColor,
                           ),
                         )
-                      : Consumer(builder: (context, ref, child) {
-                          final sta = ref.watch(chatProvider);
-                          return sta.chatState == LoadState.loading
-                              ? const Center(
-                                  child: CupertinoActivityIndicator(
-                                    color: AppColors.primaryMainColor,
-                                  ),
-                                )
-                              : DummyQuestionCont(
-                                  text: state.errorMessage, isResp: true);
-                        }),
+                      :  DummyQuestionCont(
+                                  text: state.errorMessage, isResp: true),
+                        
                   const Spacing.largeHeight(),
                   Text(
                     'History',
