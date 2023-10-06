@@ -55,7 +55,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         debugPrint('User cookie : ${userData?.email}');
         debugPrint('User cookie : ${userData?.name}');
         debugPrint('User cookie : ${userData?.credits}');
-        SignUpScreen.cookies = userData?.cookie ?? "";
+        //!Remove this code once the sign up starts returning otp
+        final login = await authRepository.signIn(email, password);
+        SignUpScreen.cookies = (userData?.cookie ?? "") == '' || (userData?.cookie ?? "") == null ? (login?.cookie ?? "") : (userData?.cookie ?? "");
 
         toastMessage('Welcome ${userData?.name ?? ""}');
         if (!mounted) return;
