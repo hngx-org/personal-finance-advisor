@@ -76,7 +76,10 @@ class ChatNotifier extends StateNotifier<ChatState> {
   }
 
   void updateHistory(String input) {
-    state = state.copyWith(history: [input]);
+    state = state.copyWith(history: [
+      ...state.history ?? [],
+      input,
+    ]);
   }
 }
 

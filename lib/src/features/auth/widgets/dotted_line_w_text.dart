@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
 class DottedLineWText extends StatelessWidget {
   const DottedLineWText({
@@ -14,7 +13,7 @@ class DottedLineWText extends StatelessWidget {
       children: [
         Expanded(
           child: Text(
-            '-------------------',
+            '------------------',
             style: TextStyle(
               color: Colors.white.withOpacity(0.4),
             ),
@@ -32,7 +31,7 @@ class DottedLineWText extends StatelessWidget {
         // const Spacing.tinyWidth(),
         Expanded(
           child: Text(
-            '-------------------',
+            '------------------',
             style: TextStyle(
               color: Colors.white.withOpacity(0.4),
             ),
