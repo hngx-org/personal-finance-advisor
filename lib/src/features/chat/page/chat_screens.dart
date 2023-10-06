@@ -92,6 +92,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           children: _chatCont.text.isNotEmpty || state.errorMessage != ''
               ? [
                   const Spacing.mediumHeight(),
+                  state.loadState == LoadState.loading
+                      ? Text('Loading...')
+                      : SizedBox(),
                   (state.history ?? []).isEmpty
                       ? const Text('')
                       : ListView.builder(
@@ -106,14 +109,14 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                   DummyQuestionCont(
                     text: question,
                   ),
-                  DummyQuestionCont(text: state.errorMessage, isResp: true),
                   state.loadState == LoadState.loading
                       ? const Center(
                           child: CupertinoActivityIndicator(
                             color: AppColors.primaryMainColor,
                           ),
                         )
-                      : const SizedBox(),
+                      : DummyQuestionCont(
+                          text: state.errorMessage, isResp: true),
                   const Spacing.smallHeight(),
                 ]
               : [
