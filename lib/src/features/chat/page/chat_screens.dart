@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
 import 'package:personal_finance_advisor/src/core/utils/app_enums.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
+import 'package:personal_finance_advisor/src/features/chat/page/widgets/dummy_question.dart';
 import 'package:personal_finance_advisor/src/features/settings/screens/settings_screen.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_image_view.dart';
 import 'package:personal_finance_advisor/src/general_widgets/general_widgets_exports.dart';
@@ -25,11 +26,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await ref
-          .read(chatProvider.notifier)
-          .chatHistory('Personal Finance Advisor');
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+    //   await ref
+    //       .read(chatProvider.notifier)
+    //       .chatHistory('Personal Finance Advisor');
+    // });
   }
 
   String question = '';
@@ -92,9 +93,35 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           children: _chatCont.text.isNotEmpty || state.errorMessage != ''
               ? [
                   const Spacing.mediumHeight(),
-                  state.loadState == LoadState.loading
+                  state.chatState == LoadState.loading
                       ? Text('Loading...')
                       : SizedBox(),
+                  DummyQuestionCont(
+                    text: question,
+                  ),
+                  state.chatState == LoadState.loading
+                      ? const Center(
+                          child: CupertinoActivityIndicator(
+                            color: AppColors.primaryMainColor,
+                          ),
+                        )
+                      : Consumer(builder: (context, ref, child) {
+                          final sta = ref.watch(chatProvider);
+                          return sta.chatState == LoadState.loading
+                              ? const Center(
+                                  child: CupertinoActivityIndicator(
+                                    color: AppColors.primaryMainColor,
+                                  ),
+                                )
+                              : DummyQuestionCont(
+                                  text: state.errorMessage, isResp: true);
+                        }),
+                  const Spacing.largeHeight(),
+                  Text(
+                    'History',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
+                  const Spacing.smallHeight(),
                   (state.history ?? []).isEmpty
                       ? const Text('')
                       : ListView.builder(
@@ -106,17 +133,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                               text: text,
                             );
                           }),
-                  DummyQuestionCont(
-                    text: question,
-                  ),
-                  state.loadState == LoadState.loading
-                      ? const Center(
-                          child: CupertinoActivityIndicator(
-                            color: AppColors.primaryMainColor,
-                          ),
-                        )
-                      : DummyQuestionCont(
-                          text: state.errorMessage, isResp: true),
                   const Spacing.smallHeight(),
                 ]
               : [
@@ -180,7 +196,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                       text:
                           'Discuss the pros and cons of investing in real estate'),
                   const Spacing.smallHeight(),
-                  state.loadState == LoadState.loading
+                  state.chatState == LoadState.loading
                       ? const Center(
                           child: CupertinoActivityIndicator(
                             color: AppColors.primaryMainColor,
@@ -195,7 +211,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                           itemCount: (state.history ?? []).length,
                           itemBuilder: (context, index) {
                             final text = (state.history ?? [])[index];
-                            return DummyQuestionCont(text: text, isResp: true);
+                            return DummyQuestionCont(text: text, isResp: false);
                           }),
                 ],
         ),
@@ -216,8 +232,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               question = p0;
             });
             debugPrint('In Chat submitted');
-            notifer.sendChat(p0);
-
+            notifer.sendChat(p0, context);
+            notifer.updateHistory(p0);
             _chatCont.clear();
           },
           borderRadius: 30,
@@ -235,8 +251,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                       question = _chatCont.text;
                     });
                     debugPrint('In Chat field');
-                    notifer.sendChat(_chatCont.text);
-
+                    notifer.sendChat(_chatCont.text, context);
+                    notifer.updateHistory(_chatCont.text);
                     _chatCont.clear();
                   },
                   svgPath: 'assets/images/send.svg',
@@ -246,42 +262,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           ),
         ),
       ),
-    );
-  }
-}
-
-class DummyQuestionCont extends StatelessWidget {
-  const DummyQuestionCont({
-    this.text = 'Prompt Appears Here',
-    this.isResp = false,
-    super.key,
-  });
-  final String text;
-  final bool? isResp;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      // height: 40,
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      margin: const EdgeInsets.symmetric(
-          horizontal: Dimensions.medium, vertical: Dimensions.small),
-      decoration: BoxDecoration(
-          color: isResp ?? false
-              ? Colors.blue.shade50
-              // AppColors.primaryMainColor.withOpacity(0.3)
-              : const Color(0XFF3F3F3F).withOpacity(0.1),
-          borderRadius: BorderRadius.circular(30)),
-      child: Center(
-          child: Text(
-        text,
-        overflow: TextOverflow.clip,
-        textAlign: TextAlign.left,
-        style: const TextStyle(
-          color: Color(0XFF3F3F3F),
-        ),
-      )),
     );
   }
 }
