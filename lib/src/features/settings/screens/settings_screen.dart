@@ -4,6 +4,7 @@ import 'package:hng_authentication/authentication.dart';
 import 'package:personal_finance_advisor/src/features/auth/screens/log_in_screen.dart';
 import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
+import '../../../core/helper_fxn.dart';
 import '../../auth/providers/user_provider.dart';
 
 final isLoadingProvider = StateProvider<bool>((ref) => false);
@@ -23,6 +24,7 @@ class SettingsScreen extends ConsumerWidget {
       try {
         await authRepository.logout(userDetails['email']!);
         // Go back to login screen
+        toastMessage('Successfully logged out ${userDetails['name'] ?? ""}');
         if (!context.mounted) return;
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
