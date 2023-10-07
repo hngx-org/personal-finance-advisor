@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hng_authentication/authentication.dart';
+import 'package:personal_finance_advisor/src/features/payments/screens/payment_options.dart';
 
 import '../../../core/helper_fxn.dart';
 import '../../../core/utils/theme/colors.dart';
@@ -16,7 +17,8 @@ import '../widgets/dotted_line_w_text.dart';
 import 'sign_up_screen.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
-  const LoginScreen({super.key});
+  final Widget pageTo;
+  const LoginScreen(this.pageTo, {super.key});
   static String cookies = '';
 
   @override
@@ -52,12 +54,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           'email': userData?.email ?? "",
         });
         log('Data retrieved => ${userData.toString}');
-        toastMessage('Welcome Back ${userData?.name ?? ""}');
+        toastMessage('Welcome back ${userData?.name ?? ""}');
         LoginScreen.cookies = userData.cookie;
         if (!mounted) return;
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => const ChatScreen(),
+            builder: (context) => widget.pageTo,
           ),
           (route) => false,
         );
@@ -104,7 +106,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       child: Scaffold(
         body: Container(
           padding: EdgeInsets.only(
-            top: MediaQuery.paddingOf(context).top,
+            top: MediaQuery.paddingOf(context).top + 24,
             left: 36,
             right: 36,
             bottom: MediaQuery.viewInsetsOf(context).bottom / 36,
@@ -128,11 +130,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 children: [
                   Image.asset(
                     'assets/images/finance_guy_illustration.png',
-                    height: MediaQuery.sizeOf(context).height * 0.3,
+                    height: MediaQuery.sizeOf(context).height * 0.25,
                   ),
                   const Spacing.mediumHeight(),
                   Text(
-                    'Welcome Back',
+                    'Welcome!',
                     style: TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: 20,
@@ -258,9 +260,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                     ),
                     backgroundColor: Colors.white.withOpacity(0.28),
-                    shadowColor: const Color(0xff9183de),
+                    shadowColor: const Color(0xff9183de).withOpacity(0.8),
                   ),
-                  const Spacing.bigHeight(),
                 ],
               ),
             ),
