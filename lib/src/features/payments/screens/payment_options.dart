@@ -7,7 +7,8 @@ import 'package:personal_finance_advisor/src/features/payments/screens/basic_car
 import 'package:personal_finance_advisor/src/features/payments/screens/premium_card.dart';
 
 class PaymentOptions extends StatefulWidget {
-  const PaymentOptions({super.key});
+  final Widget pageTo;
+  const PaymentOptions({super.key, required this.pageTo});
 
   @override
   State<PaymentOptions> createState() => _PaymentOptionsState();
@@ -46,27 +47,15 @@ class _PaymentOptionsState extends State<PaymentOptions> {
         ),
       ),
       backgroundColor: Colors.blue.shade50,
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
             PremiumCard(),
-            BasicCard(),
+            BasicCard(pageTo: widget.pageTo),
           ],
         ),
       ),
-      // const SafeArea(
-      //   child: Padding(
-      //     padding: EdgeInsets.symmetric(horizontal: Dimensions.tiny),
-      //     child: Row(
-      //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //       children: [
-      //         BasicCard(),
-      //         PremiumCard(),
-      //       ],
-      //     ),
-      //   ),
-      // ),
     );
   }
 }
