@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:hng_authentication/authentication.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:personal_finance_advisor/src/core/helper_fxn.dart';
+import 'package:personal_finance_advisor/src/features/chat/page/chat_screens.dart';
 import '../../../core/utils/theme/colors.dart';
 import '../../../general_widgets/spacing.dart';
 import '../../payments/screens/payment_options.dart';
@@ -26,7 +27,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   bool showPass = false;
+  bool showConfirmPass = false;
   bool _isSending = false;
 
   Future<void> _signUpUser() async {
@@ -45,11 +49,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
 
       try {
         final userData = await authRepository.signUp(email, name, password);
-        ref.read(userProvider.notifier).setUser({
+        /*  ref.read(userProvider.notifier).setUser({
           'id': userData?.id ?? "",
           'name': userData?.name ?? "",
           'email': userData?.email ?? "",
-        });
+        }); */
 
         debugPrint('User cookie : ${userData?.cookie}');
         debugPrint('User cookie : ${userData?.email}');
@@ -57,16 +61,17 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         debugPrint('User cookie : ${userData?.credits}');
         //!Remove this code once the sign up starts returning otp
         final login = await authRepository.signIn(email, password);
-        SignUpScreen.cookies =
-            (userData?.cookie ?? "") == '' || (userData?.cookie ?? "") == null
-                ? (login?.cookie ?? "")
-                : (userData?.cookie ?? "");
+        SignUpScreen.cookies = (userData?.cookie ?? "") == ''
+            ? (login?.cookie ?? "")
+            : (userData?.cookie ?? "");
 
         toastMessage('Welcome ${userData?.name ?? ""}');
         if (!mounted) return;
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => const PaymentOptions(),
+            builder: (context) => const LoginScreen(
+              PaymentOptions(pageTo: ChatScreen()),
+            ),
           ),
           (route) => false,
         );
@@ -99,9 +104,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final userDetails = ref.watch(userProvider);
+    /* final userDetails = ref.watch(userProvider);
 
-    debugPrint(userDetails.toString()); // Testing
+    debugPrint(userDetails.toString()); // Testing */
 
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
@@ -114,7 +119,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       child: Scaffold(
         body: Container(
           padding: EdgeInsets.only(
-            top: MediaQuery.paddingOf(context).top,
+            top: MediaQuery.paddingOf(context).top + 4,
             left: 36,
             right: 36,
             bottom: MediaQuery.viewInsetsOf(context).bottom / 36,
@@ -138,9 +143,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 children: [
                   Image.asset(
                     'assets/images/finance_girl_illustration.png',
-                    height: MediaQuery.sizeOf(context).height * 0.3,
+                    height: MediaQuery.sizeOf(context).height * 0.25,
                   ),
-                  const Spacing.mediumHeight(),
+                  const Spacing.smallHeight(),
                   Text(
                     'Hi there!',
                     style: TextStyle(
@@ -205,12 +210,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   CustomTextField(
                     controller: _passwordController,
                     keyboardType: TextInputType.visiblePassword,
-                    textInputAction: TextInputAction.done,
+                    textInputAction: TextInputAction.next,
                     labelText: 'Password',
                     hintText: 'Enter your password',
                     labelIcon: Icons.key,
                     hideText: !showPass,
-                    onFieldSubmitted: (_) => _signUpUser(),
                     visibilityIcon: IconButton(
                       onPressed: () {
                         setState(() {
@@ -232,6 +236,44 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     validator: (value) {
                       if (value == null || value.isEmpty || value.length < 8) {
                         return 'Password must be at least 8 characters long';
+                      }
+                      return null;
+                    },
+                  ),
+                  const Spacing.mediumHeight(),
+                  CustomTextField(
+                    controller: _confirmPasswordController,
+                    keyboardType: TextInputType.visiblePassword,
+                    textInputAction: TextInputAction.done,
+                    labelText: 'Confirm Password',
+                    hintText: 'Confirm your password',
+                    labelIcon: Icons.key,
+                    hideText: !showConfirmPass,
+                    onFieldSubmitted: (_) => _signUpUser(),
+                    visibilityIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          showConfirmPass = !showConfirmPass;
+                        });
+                      },
+                      icon: showConfirmPass
+                          ? const Icon(
+                              Icons.remove_red_eye_rounded,
+                              color: Color(0xFF3C3C43),
+                              size: 20,
+                            )
+                          : const Icon(
+                              Icons.visibility_off_rounded,
+                              color: Color(0xFF3C3C43),
+                              size: 20,
+                            ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty || value.length < 8) {
+                        return 'Password must be at least 8 characters long';
+                      }
+                      if (value != _passwordController.text) {
+                        return 'Passwords do not match!';
                       }
                       return null;
                     },
@@ -263,7 +305,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   CustomButton(
                     onPressed: () => Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                        builder: (context) => const LoginScreen(),
+                        builder: (context) => const LoginScreen(
+                          PaymentOptions(
+                            pageTo: ChatScreen(),
+                          ),
+                        ),
                       ),
                       (route) => false,
                     ),
@@ -277,9 +323,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       ),
                     ),
                     backgroundColor: Colors.white.withOpacity(0.28),
-                    shadowColor: const Color(0xff9183de),
+                    shadowColor: const Color(0xff9183de).withOpacity(0.8),
                   ),
-                  const Spacing.bigHeight(),
+                  const Spacing.mediumHeight(),
                 ],
               ),
             ),

@@ -1,21 +1,25 @@
+import 'package:personal_finance_advisor/src/core/utils/app_enums.dart';
+
 class ChatState {
   final LoadState loadState;
   final LoadState? chatState;
   final String errorMessage; //resp
   final List<String>? history;
 
-  ChatState(
-      {required this.loadState,
-      this.errorMessage = '',
-      this.history,
-      this.chatState});
+  ChatState({
+    required this.loadState,
+    this.errorMessage = '',
+    this.history,
+    this.chatState,
+  });
 
   factory ChatState.initialState() {
     return ChatState(
-        loadState: LoadState.idle,
-        errorMessage: '',
-        chatState: LoadState.idle,
-        history: []);
+      loadState: LoadState.idle,
+      errorMessage: '',
+      chatState: LoadState.idle,
+      history: [],
+    );
   }
 
   ChatState copyWith({
@@ -33,4 +37,4 @@ class ChatState {
   }
 }
 
-enum LoadState { loading, idle, success, error, loadmore, done, noNetwork }
+

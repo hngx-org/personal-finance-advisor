@@ -7,7 +7,8 @@ import 'package:personal_finance_advisor/src/features/payments/screens/basic_car
 import 'package:personal_finance_advisor/src/features/payments/screens/premium_card.dart';
 
 class PaymentOptions extends StatefulWidget {
-  const PaymentOptions({super.key});
+  final Widget pageTo;
+  const PaymentOptions({super.key, required this.pageTo});
 
   @override
   State<PaymentOptions> createState() => _PaymentOptionsState();
@@ -18,6 +19,8 @@ class _PaymentOptionsState extends State<PaymentOptions> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios,
@@ -40,31 +43,19 @@ class _PaymentOptionsState extends State<PaymentOptions> {
         title: Text(
           "Payment options",
           style: AppTextStyles.textMdBold
-              .copyWith(color: AppColors.baseBlack, fontSize: 24),
+              .copyWith(color: AppColors.baseBlack, fontSize: 22),
         ),
       ),
       backgroundColor: Colors.blue.shade50,
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
             PremiumCard(),
-            BasicCard(),
+            BasicCard(pageTo: widget.pageTo),
           ],
         ),
       ),
-      // const SafeArea(
-      //   child: Padding(
-      //     padding: EdgeInsets.symmetric(horizontal: Dimensions.tiny),
-      //     child: Row(
-      //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      //       children: [
-      //         BasicCard(),
-      //         PremiumCard(),
-      //       ],
-      //     ),
-      //   ),
-      // ),
     );
   }
 }
