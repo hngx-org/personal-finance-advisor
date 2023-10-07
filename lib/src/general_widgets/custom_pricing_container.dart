@@ -7,6 +7,7 @@ import 'package:personal_finance_advisor/src/core/constants/dimensions.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/colors.dart';
 import 'package:personal_finance_advisor/src/core/utils/theme/text_styles.dart';
 import 'package:personal_finance_advisor/src/features/auth/providers/user_provider.dart';
+import 'package:personal_finance_advisor/src/features/chat/page/chat_screens.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_elevated_button.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_text_with_close.dart';
 import 'package:personal_finance_advisor/src/general_widgets/custom_text_with_tick.dart';
@@ -172,34 +173,53 @@ class _CustomPricingContainerState
               ),
               const Spacer(),
               Align(
-                alignment: AlignmentDirectional.bottomCenter,
-                child: widget.optionalButton
-                    ? CustomElevatedButton(
-                        width: 200,
-                        height: 48,
-                        text: widget.buttontext,
-                        buttonTextStyle: TextStyle(
-                          color: widget.buttontextcolor ?? AppColors.baseWhite,
-                          fontSize: widget.buttontextsize ?? Dimensions.medium,
-                          // fontWeight: FontWeight.w600,
-                        ),
-                        onTap: widget.onTap,
-                        buttonStyle: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              widget.buttonColor ?? AppColors.baseBlack),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50),
+                  alignment: AlignmentDirectional.bottomCenter,
+                  child: widget.optionalButton
+                      ? CustomElevatedButton(
+                          width: 200,
+                          height: 48,
+                          text: widget.buttontext,
+                          buttonTextStyle: TextStyle(
+                            color:
+                                widget.buttontextcolor ?? AppColors.baseWhite,
+                            fontSize:
+                                widget.buttontextsize ?? Dimensions.medium,
+                            // fontWeight: FontWeight.w600,
+                          ),
+                          onTap: widget.onTap,
+                          buttonStyle: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                widget.buttonColor ?? AppColors.baseBlack),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50),
+                              ),
                             ),
                           ),
-                        ),
-                      )
-                    : Platform.isIOS
-                        ? pay.applePay(context, amountToPay: "10", userID: '23')
-                        : pay.googlePay(context,
-                            amountToPay: "10", userID: userDetails['id']!),
-              ),
+                        )
+                      : Platform.isIOS
+                          ? pay.applePay(context,
+                              amountToPay: "10", userID: '23')
+                          : pay
+                              .googlePay(context,
+                                  amountToPay: "10", userID: userDetails['id']!),
+                            //   .then((result) {
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => const ChatScreen()),
+                            //   );
+                            // }).catchError((error) {
+                            //   final snackBar = SnackBar(
+                            //     content: Text(error),
+                            //   );
+                              // ScaffoldMessenger.of(context)
+                                  // .showSnackBar(snackBar); }
+                            
+              
+
+                            ),
               const Spacing.mediumHeight(),
             ],
           ),
