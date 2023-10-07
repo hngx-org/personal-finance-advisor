@@ -3,5 +3,4 @@ class AppStrings {
 
   // Sample example
   static const String appName = "Personal Finance Advisor";
-
 }

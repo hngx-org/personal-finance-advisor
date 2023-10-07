@@ -93,10 +93,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           children: _chatCont.text.isNotEmpty || state.errorMessage != ''
               ? [
                   const Spacing.mediumHeight(),
-                  state.chatState == LoadState.loading
-                      ? Text('Loading...')
-                      : SizedBox(),
-                  DummyQuestionCont(
+                               DummyQuestionCont(
                     text: question,
                   ),
                   state.errorMessage == 'loading'
@@ -105,9 +102,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                             color: AppColors.primaryMainColor,
                           ),
                         )
-                      :  DummyQuestionCont(
-                                  text: state.errorMessage, isResp: true),
-                        
+                      : DummyQuestionCont(
+                          text: state.errorMessage, isResp: true),
                   const Spacing.largeHeight(),
                   Text(
                     'History',

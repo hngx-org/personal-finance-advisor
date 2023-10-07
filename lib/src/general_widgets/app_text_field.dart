@@ -148,7 +148,6 @@ class _AppTextFieldState extends State<AppTextField> {
               hintStyle: AppTextStyles.textXsRegular.copyWith(
                   fontWeight: FontWeight.w400,
                   fontSize: 14,
-
                   color: AppColors.gray600),
               errorStyle: TextStyle(color: AppColors.gray900),
 

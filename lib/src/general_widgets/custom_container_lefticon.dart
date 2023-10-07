@@ -58,16 +58,13 @@ class CustomContainerLeftIcon extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Icon(icon,
-                    color: AppColors
-                        .baseBlack), 
+                Icon(icon, color: AppColors.baseBlack),
                 const Spacing.smallWidth(),
                 Expanded(
                   child: TextFormField(
                     controller: controller,
                     decoration: InputDecoration(
-                      border: InputBorder
-                          .none, 
+                      border: InputBorder.none,
                       focusedBorder: InputBorder.none,
                       hintText: field,
                       hintStyle: AppTextStyles.textMdMedium.copyWith(
