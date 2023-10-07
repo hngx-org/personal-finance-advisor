@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hng_authentication/authentication.dart';
 import 'package:personal_finance_advisor/src/features/auth/screens/log_in_screen.dart';
 import 'package:personal_finance_advisor/src/features/chat/page/chat_screens.dart';
+import 'package:personal_finance_advisor/src/features/settings/screens/upgrade_premium.dart';
 import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
 import '../../../core/helper_fxn.dart';
@@ -92,6 +94,17 @@ class SettingsScreen extends ConsumerWidget {
               ),
               subtitle: Text(userDetails['email']!),
             ),
+            Spacing.largeHeight(),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const UpgradePremium(),
+                    ),
+                  );
+                },
+                child: Text('Upgrade to Premium')),
             const Spacing.largeHeight(),
             ElevatedButton(
               onPressed: () {
