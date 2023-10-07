@@ -20,11 +20,7 @@ class UpgradePremium extends StatelessWidget {
             color: Colors.black,
           ),
           onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const SettingsScreen(),
-              ),
-            );
+            Navigator.of(context).pop();
           },
         ),
         backgroundColor: Colors.transparent,
