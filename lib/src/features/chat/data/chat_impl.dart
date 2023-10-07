@@ -1,0 +1,2 @@
+// history = ["user: Hello!","AI: Hi! How can I help you today?","user: I'm looking for information on the latest trends in artificial intelligence.","AI: Sure, here are some of the latest trends in artificial intelligence"];
+// final response = await openAI.getChatCompletions(history userInput, cookie);

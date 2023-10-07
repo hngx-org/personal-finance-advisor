@@ -64,7 +64,7 @@ class CustomElevatedButton extends BaseButton {
                 text,
                 style: buttonTextStyle ??
                     theme.textTheme.labelLarge!.copyWith(
-                        color:  AppColors.baseWhite,
+                        color: AppColors.baseWhite,
                         fontSize: 19,
                         fontWeight: FontWeight.w700),
               ),

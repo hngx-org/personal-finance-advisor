@@ -231,7 +231,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                 question = p0;
               });
               debugPrint('In Chat submitted');
-              notifer.sendChat(p0, context);
+              // notifer.sendChat(p0, context);
               notifer.updateHistory(p0);
               print(state.history?.length);
               _chatCont.clear();
@@ -251,7 +251,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                         question = _chatCont.text;
                       });
                       debugPrint('In Chat field');
-                      notifer.sendChat(_chatCont.text, context);
+                      // notifer.sendChat(_chatCont.text, context);
                       notifer.updateHistory(_chatCont.text);
                       _chatCont.clear();
                     },

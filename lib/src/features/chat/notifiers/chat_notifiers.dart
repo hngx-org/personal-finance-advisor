@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:personal_finance_advisor/src/core/helper_fxn.dart';
+import 'package:personal_finance_advisor/src/core/utils/app_enums.dart';
 import 'package:personal_finance_advisor/src/features/auth/screens/sign_up_screen.dart';
 import 'package:personal_finance_advisor/src/features/chat/notifiers/chat_state.dart';
 import 'package:hngx_openai/repository/openai_repository.dart';
@@ -56,6 +57,7 @@ class ChatNotifier extends StateNotifier<ChatState> {
           state.history ?? [], userInput, cookie);
 
       log('Data Resp for HISTORY: $response');
+      print('Data Resp for HISTORY: $response');
       state = state.copyWith(errorMessage: response, loadState: LoadState.done);
       if (response.toString() == 'Error: Subscription Required') {
         errorToastMessage(response);

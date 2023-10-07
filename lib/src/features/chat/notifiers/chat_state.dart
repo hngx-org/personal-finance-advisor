@@ -1,3 +1,5 @@
+import 'package:personal_finance_advisor/src/core/utils/app_enums.dart';
+
 class ChatState {
   final LoadState loadState;
   final LoadState? chatState;
@@ -35,4 +37,4 @@ class ChatState {
   }
 }
 
-enum LoadState { loading, idle, success, error, loadmore, done, noNetwork }
+

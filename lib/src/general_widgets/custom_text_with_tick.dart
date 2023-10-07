@@ -30,12 +30,12 @@ class CustomTickText extends StatelessWidget {
         ),
         const SizedBox(width: 10),
         Text(
-            content!,
-            style: const TextStyle(
-              // overflow: TextOverflow.ellipsis,
-              color: Colors.black,
-              fontSize: Dimensions.medium,
-            ),
+          content!,
+          style: const TextStyle(
+            // overflow: TextOverflow.ellipsis,
+            color: Colors.black,
+            fontSize: Dimensions.medium,
+          ),
         ),
       ],
     );

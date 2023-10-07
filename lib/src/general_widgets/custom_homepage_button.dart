@@ -7,7 +7,8 @@ class HompageButtons extends StatelessWidget {
   final Color buttonColor;
   final Color buttonTitleColor;
 
-  const HompageButtons({super.key, 
+  const HompageButtons({
+    super.key,
     this.borderColor = const Color(0x000000ff),
     this.buttonTitle = '',
     this.buttonColor = const Color(0x000000ff),
