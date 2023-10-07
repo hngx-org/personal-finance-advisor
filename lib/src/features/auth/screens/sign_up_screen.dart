@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:hng_authentication/authentication.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:personal_finance_advisor/src/core/helper_fxn.dart';
+import 'package:personal_finance_advisor/src/features/chat/page/chat_screens.dart';
 import '../../../core/utils/theme/colors.dart';
 import '../../../general_widgets/spacing.dart';
 import '../../payments/screens/payment_options.dart';
@@ -69,7 +70,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (context) => const LoginScreen(
-              PaymentOptions(),
+              PaymentOptions(pageTo: ChatScreen()),
             ),
           ),
           (route) => false,
@@ -304,8 +305,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   CustomButton(
                     onPressed: () => Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
-                        builder: (context) =>
-                            const LoginScreen(PaymentOptions()),
+                        builder: (context) => const LoginScreen(
+                          PaymentOptions(
+                            pageTo: ChatScreen(),
+                          ),
+                        ),
                       ),
                       (route) => false,
                     ),

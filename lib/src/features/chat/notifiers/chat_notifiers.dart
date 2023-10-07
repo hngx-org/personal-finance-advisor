@@ -5,6 +5,7 @@ import 'package:personal_finance_advisor/src/features/auth/screens/sign_up_scree
 import 'package:personal_finance_advisor/src/features/chat/notifiers/chat_state.dart';
 import 'package:hngx_openai/repository/openai_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:personal_finance_advisor/src/features/chat/page/chat_screens.dart';
 import 'package:personal_finance_advisor/src/features/payments/screens/payment_options.dart';
 import '../../auth/screens/log_in_screen.dart';
 
@@ -29,7 +30,9 @@ class ChatNotifier extends StateNotifier<ChatState> {
         errorToastMessage(response);
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const PaymentOptions(),
+            builder: (context) => PaymentOptions(
+              pageTo: ChatScreen(),
+            ),
           ),
         );
       }
@@ -59,7 +62,9 @@ class ChatNotifier extends StateNotifier<ChatState> {
         errorToastMessage(response);
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const PaymentOptions(),
+            builder: (context) => const PaymentOptions(
+              pageTo: ChatScreen(),
+            ),
           ),
         );
       }
