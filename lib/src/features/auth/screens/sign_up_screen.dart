@@ -6,6 +6,7 @@ import 'package:personal_finance_advisor/src/core/helper_fxn.dart';
 import 'package:personal_finance_advisor/src/features/chat/page/chat_screens.dart';
 import '../../../core/utils/theme/colors.dart';
 import '../../../general_widgets/spacing.dart';
+import '../../chat/page/chat_intro_screen.dart';
 import '../../payments/screens/payment_options.dart';
 import '../providers/user_provider.dart';
 import '../widgets/custom_botton.dart';
@@ -70,7 +71,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
             builder: (context) => const LoginScreen(
-              PaymentOptions(pageTo: ChatScreen()),
+              PaymentOptions(pageTo: ChatIntroScreen()),
             ),
           ),
           (route) => false,
@@ -306,9 +307,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     onPressed: () => Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(
                         builder: (context) => const LoginScreen(
-                          PaymentOptions(
-                            pageTo: ChatScreen(),
-                          ),
+                          ChatScreen(),
                         ),
                       ),
                       (route) => false,

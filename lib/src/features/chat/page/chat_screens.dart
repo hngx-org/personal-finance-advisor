@@ -153,7 +153,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                         text:
                             'What is the difference between stocks and bonds?'),
                     const DummyQuestionCont(
-                        text: 'Explain the concept of compound interest.'),
+                        text: 'Explain the concept of compound interest'),
                     const Spacing.bigHeight(),
                     CustomImageView(
                       height: 24,
@@ -173,7 +173,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                         text:
                             'What are the key principles of financial planning?'),
                     const DummyQuestionCont(
-                        text: '"How does credit scoring work?'),
+                        text: 'How does credit scoring work?'),
                     const Spacing.bigHeight(),
                     CustomImageView(
                       height: 24,
@@ -223,6 +223,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           padding: const EdgeInsets.all(Dimensions.medium),
           margin: MediaQuery.of(context).viewInsets,
           child: AppTextField(
+            // maxLines: 3,
             controller: _chatCont,
             backgroundColor: Colors.blue.shade50,
             hintText: 'Let me give you financial advice',
