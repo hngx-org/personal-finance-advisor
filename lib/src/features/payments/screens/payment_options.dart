@@ -18,6 +18,8 @@ class _PaymentOptionsState extends State<PaymentOptions> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
+        centerTitle: true,
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios,
@@ -40,7 +42,7 @@ class _PaymentOptionsState extends State<PaymentOptions> {
         title: Text(
           "Payment options",
           style: AppTextStyles.textMdBold
-              .copyWith(color: AppColors.baseBlack, fontSize: 24),
+              .copyWith(color: AppColors.baseBlack, fontSize: 22),
         ),
       ),
       backgroundColor: Colors.blue.shade50,

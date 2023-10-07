@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hng_authentication/authentication.dart';
 import 'package:personal_finance_advisor/src/features/auth/screens/log_in_screen.dart';
+import 'package:personal_finance_advisor/src/features/chat/page/chat_screens.dart';
 import 'package:personal_finance_advisor/src/general_widgets/spacing.dart';
 
 import '../../../core/helper_fxn.dart';
@@ -28,7 +29,7 @@ class SettingsScreen extends ConsumerWidget {
         if (!context.mounted) return;
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (context) => const LoginScreen(),
+              builder: (context) => const LoginScreen(ChatScreen()),
             ),
             (route) => false);
         ref.read(isLoadingProvider.notifier).state = false;
@@ -93,14 +94,36 @@ class SettingsScreen extends ConsumerWidget {
             ),
             const Spacing.largeHeight(),
             ElevatedButton(
-              onPressed: isLoading ? null : logOutUser,
-              child: isLoading
-                  ? const SizedBox(
-                      height: 24,
-                      width: 24,
-                      child: CircularProgressIndicator(),
-                    )
-                  : const Text('Logout'),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text('Log Out'),
+                    content: const Text(
+                      'Are you sure you want to log out?',
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('No'),
+                      ),
+                      TextButton(
+                        onPressed: isLoading ? null : logOutUser,
+                        child: isLoading
+                            ? const SizedBox(
+                                height: 24,
+                                width: 24,
+                                child: CircularProgressIndicator(),
+                              )
+                            : const Text('Yes'),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              child: const Text('Log Out'),
             ),
           ],
         ),
