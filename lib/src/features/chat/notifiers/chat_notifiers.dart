@@ -36,7 +36,7 @@ class ChatNotifier extends StateNotifier<ChatState> {
 //  If the user asks you for advice, give a personalized and unbiased recommendation based on their goals and situation. 
 //  If the user asks you something that is not related to finance, politely decline to answer and redirect them to your area of expertise.
 // """";
-
+        
     log('cookies used $cookie');
     state =
         state.copyWith(chatState: LoadState.loading, errorMessage: 'loading');
