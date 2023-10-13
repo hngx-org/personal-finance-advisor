@@ -4,7 +4,11 @@ import 'package:personal_finance_advisor/src/features/chat/page/chat_intro_scree
 import 'package:personal_finance_advisor/src/general_widgets/custom_pricing_container.dart';
 
 class BasicCard extends StatelessWidget {
-  const BasicCard({super.key});
+  final Widget pageTo;
+  const BasicCard({
+    super.key,
+    required this.pageTo,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +29,7 @@ class BasicCard extends StatelessWidget {
         Navigator.pushAndRemoveUntil(
           context,
           CupertinoPageRoute(
-            builder: (context) => const ChatIntroScreen(),
+            builder: (context) => pageTo,
           ),
           (route) => false,
         );

@@ -13,7 +13,7 @@ class PremiumCard extends StatelessWidget {
       plan: "PREMIUM",
       plantext:
           """For individuals who desire a full experience of Finance Advisor""",
-      planprice: r"$10",
+      planprice: r"$5",
       pricetext: "Per member, per month",
       containercolor: Colors.blueAccent.shade200,
       iconkbgcolor: AppColors.baseWhite,
